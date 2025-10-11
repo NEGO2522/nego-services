@@ -478,7 +478,7 @@ const Landing = () => {
                 whileHover={{ y: -10 }}
               >
                 <img 
-                  src="/src/assets/favicon.png" 
+                  src="/favicon.png" 
                   alt="NEGO Team" 
                   className="w-full h-full object-cover transform transition-transform duration-700 hover:scale-105"
                 />
