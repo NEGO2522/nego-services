@@ -147,105 +147,147 @@ const Landing = () => {
       <main id="home" className="container mx-auto px-6 pt-4 pb-16 md:pb-24 relative z-10">
         {/* Hero Section */}
         <motion.section 
-          className="flex flex-col items-center justify-center min-h-[40vh] text-center fade-up"
+          className="fade-up min-h-[50vh]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="relative max-w-4xl mx-auto">
+          <div className="relative max-w-7xl mx-auto">
             {/* Animated gradient circle */}
             <div className="absolute -top-20 -right-20 w-96 h-96 bg-gradient-to-r from-[#C2A68C] to-[#E6D8C3] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
             
             <motion.div 
-              className="relative z-10"
+              className="relative z-10 grid md:grid-cols-2 gap-10 items-center"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <motion.div 
-                className="inline-block px-4 py-2 mb-6 text-sm font-medium text-[#C2A68C] bg-[#C2A68C]/10 rounded-full backdrop-blur-sm border border-[#C2A68C]/20"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-              >
-                <span className="relative flex h-3 w-3 mr-2 float-left mt-1.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C2A68C] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-[#C2A68C]"></span>
-                </span>
-                We're open for business
-              </motion.div>
-              
-              <motion.h1 
-                className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.8 }}
-              >
-                <span className="bg-gradient-to-r from-[#C2A68C] to-[#E6D8C3] bg-clip-text text-transparent">Building</span>
-                <br />
-                <span className="text-white">Digital Future</span>
-              </motion.h1>
-              
-              <motion.p 
-                className="text-lg md:text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed font-light"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-              >
-                We create exceptional digital experiences that drive growth and innovation for businesses in the modern world.
-              </motion.p>
-              
-              <motion.div
-                className="flex flex-col sm:flex-row gap-6 items-center justify-center"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7, duration: 0.8 }}
-              >
-                <motion.button 
-                  className="group relative px-8 py-4 bg-gradient-to-r from-[#C2A68C] to-[#E6D8C3] text-[#0A0A0A] font-medium rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-[#C2A68C]/30"
-                  whileHover={{ y: -2, scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+              {/* Left column: content */}
+              <div className="text-center md:text-left">
+                <motion.div 
+                  className="inline-block px-4 py-2 mb-5 text-sm font-medium text-[#C2A68C] bg-[#C2A68C]/10 rounded-full backdrop-blur-sm border border-[#C2A68C]/20"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
                 >
-                  <span className="relative z-10 flex items-center">
-                    Get Started
-                    <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
+                  <span className="relative flex h-3 w-3 mr-2 float-left mt-1.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C2A68C] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-[#C2A68C]"></span>
                   </span>
-                  <span className="absolute inset-0 bg-white/10 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                </motion.button>
-                
-                <motion.a 
-                  href="/services"
-                  className="group flex items-center text-gray-300 hover:text-white font-medium transition-colors"
-                  whileHover={{ x: 5 }}
+                  We're open for business
+                </motion.div>
+
+                <motion.h1 
+                  className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-5 leading-[1.1]"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3, duration: 0.8 }}
                 >
-                  <span className="mr-2">Explore Services</span>
-                  <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </motion.a>
-              </motion.div>
-              
-              {/* Stats */}
-              <motion.div 
-                className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 max-w-4xl mx-auto"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.9 }}
-              >
-                {[
-                  { number: '50+', label: 'Projects Completed' },
-                  { number: '95%', label: 'Client Satisfaction' },
-                  { number: '10+', label: 'Years Experience' },
-                  { number: '100%', label: 'Dedication' }
-                ].map((stat, index) => (
-                  <div key={index} className="text-center">
-                    <div className="text-3xl md:text-4xl font-bold text-[#C2A68C] mb-2">{stat.number}</div>
-                    <div className="text-sm text-gray-400 uppercase tracking-wider">{stat.label}</div>
+                  <span className="bg-gradient-to-r from-[#C2A68C] to-[#E6D8C3] bg-clip-text text-transparent">Build. Launch.</span>
+                  <br />
+                  Grow.
+                </motion.h1>
+
+                <motion.p 
+                  className="text-base md:text-lg text-gray-300 mb-8 max-w-xl md:max-w-2xl md:mx-0 mx-auto leading-relaxed font-light"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5, duration: 0.8 }}
+                >
+                  Senior-led team crafting fast, clean websites that convert. Clear plans, honest updates, on-time delivery.
+                </motion.p>
+
+                <motion.div
+                  className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center md:items-start justify-center md:justify-start"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7, duration: 0.8 }}
+                >
+                  <motion.button 
+                    className="group relative px-7 py-3.5 bg-gradient-to-r from-[#C2A68C] to-[#E6D8C3] text-[#0A0A0A] font-medium rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-[#C2A68C]/30"
+                    whileHover={{ y: -2, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <span className="relative z-10 flex items-center">
+                      Get Started
+                      <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </span>
+                    <span className="absolute inset-0 bg-white/10 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                  </motion.button>
+                  
+                  <motion.a 
+                    href="/services"
+                    className="group flex items-center text-gray-300 hover:text-white font-medium transition-colors"
+                    whileHover={{ x: 5 }}
+                  >
+                    <span className="mr-2">Explore Services</span>
+                    <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </motion.a>
+                </motion.div>
+
+                {/* Trust badges */}
+                <motion.div 
+                  className="flex flex-wrap md:justify-start justify-center gap-3 mt-8 max-w-2xl"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.9 }}
+                >
+                  {[
+                    'On‑time delivery',
+                    'Transparent pricing',
+                    'Senior-led team',
+                    'Fast communication'
+                  ].map((badge, i) => (
+                    <span key={i} className="text-xs md:text-sm bg-[#1A1A1A] text-gray-300 px-3.5 py-1.5 rounded-full border border-[#252525]">
+                      {badge}
+                    </span>
+                  ))}
+                </motion.div>
+              </div>
+
+              {/* Right column: glass card */}
+              <div className="hidden md:block">
+                <motion.div 
+                  className="relative rounded-2xl border border-[#2a2a2a] bg-[#111111]/60 backdrop-blur-md p-6 overflow-hidden"
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                  whileHover={{ y: -6 }}
+                >
+                  <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#C2A68C]/10 rounded-full blur-3xl"></div>
+                  <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-[#E6D8C3]/10 rounded-full blur-3xl"></div>
+
+                  <div className="relative z-10 space-y-5">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-gray-400">Recent delivery</span>
+                      <span className="text-xs px-2 py-1 rounded-full bg-[#C2A68C]/10 text-[#C2A68C] border border-[#C2A68C]/20">on time</span>
+                    </div>
+                    <div className="rounded-xl bg-gradient-to-br from-[#1A1A1A] to-[#0F0F0F] border border-[#252525] p-5">
+                      <div className="flex items-center gap-3 mb-3">
+                        <img src="https://lathishop.com/assets/Logo.png" alt="Lathi logo" className="w-10 h-10 rounded-full object-contain" />
+                        <div>
+                          <div className="text-sm text-white font-semibold">Lathi</div>
+                          <div className="text-xs text-gray-400">E‑commerce site revamp</div>
+                        </div>
+                      </div>
+                      <blockquote className="text-gray-300 text-sm leading-relaxed">
+                        “Speed went up, bounce went down. The handover was clean and the team shipped on time.”
+                      </blockquote>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        <span className="text-xs px-2.5 py-1 rounded-full bg-[#141414] border border-[#2a2a2a] text-gray-300">Lighthouse 98</span>
+                        <span className="text-xs px-2.5 py-1 rounded-full bg-[#141414] border border-[#2a2a2a] text-gray-300">99.9% uptime</span>
+                        <span className="text-xs px-2.5 py-1 rounded-full bg-[#141414] border border-[#2a2a2a] text-gray-300">TTFB &lt; 200ms</span>
+                      </div>
+                    </div>
+
+                    
                   </div>
-                ))}
-              </motion.div>
+                </motion.div>
+              </div>
             </motion.div>
           </div>
           
