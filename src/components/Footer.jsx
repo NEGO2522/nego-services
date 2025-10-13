@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -9,20 +10,20 @@ const Footer = () => {
             © {new Date().getFullYear()} NEGO. All rights reserved.
           </div>
           <div className="flex flex-wrap justify-center gap-6">
-            <a 
-              href="/privacy-policy" 
+            <Link 
+              to="/privacy-policy" 
               className="relative group text-gray-300 hover:text-[#C2A68C] transition-all duration-300"
             >
               Privacy Policy
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#C2A68C] transition-all duration-300 group-hover:w-full"></span>
-            </a>
-            <a 
-              href="/terms" 
+            </Link>
+            <Link 
+              to="/terms" 
               className="relative group text-gray-300 hover:text-[#C2A68C] transition-all duration-300"
             >
               Terms of Service
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#C2A68C] transition-all duration-300 group-hover:w-full"></span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
