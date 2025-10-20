@@ -163,7 +163,7 @@ const ContactUs = () => {
                             MK
                           </div>
                           <div className="w-full">
-                            <h4 className="text-xl font-semibold text-white mb-1">Maish Kumar</h4>
+                            <h4 className="text-xl font-semibold text-white mb-1">Manish Kumar</h4>
                             <p className="text-[#C2A68C] font-medium mb-4">Team Member</p>
                             <div className="flex justify-center space-x-4">
                               <a 
