@@ -252,7 +252,7 @@ const Landing = () => {
               {/* Right column: glass card */}
               <div className="hidden md:block">
                 <motion.div 
-                  className="relative rounded-2xl border border-[#2a2a2a] bg-[#111111]/60 backdrop-blur-md p-6 overflow-hidden"
+                  className="relative rounded-2xl border border-[#2a2a2a] bg-[#111111]/60 backdrop-blur-md p-6 overflow-hidden h-full"
                   initial={{ opacity: 0, x: 30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.3 }}
@@ -261,29 +261,69 @@ const Landing = () => {
                   <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#C2A68C]/10 rounded-full blur-3xl"></div>
                   <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-[#E6D8C3]/10 rounded-full blur-3xl"></div>
 
-                  <div className="relative z-10 space-y-5">
+                  <div className="relative z-10 space-y-5 h-full flex flex-col">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-400">Recent delivery</span>
-                      <span className="text-xs px-2 py-1 rounded-full bg-[#C2A68C]/10 text-[#C2A68C] border border-[#C2A68C]/20">on time</span>
+                      <h3 className="text-lg font-semibold text-white">Our Projects</h3>
+                      <a href="/projects" className="text-xs px-2 py-1 rounded-full bg-[#C2A68C]/10 text-[#C2A68C] border border-[#C2A68C]/20 hover:bg-[#C2A68C]/20 transition-colors">View All</a>
                     </div>
-                    <div className="rounded-xl bg-gradient-to-br from-[#1A1A1A] to-[#0F0F0F] border border-[#252525] p-5">
-                      <div className="flex items-center gap-3 mb-3">
-                        <img src="https://lathishop.com/assets/Logo.png" alt="Lathi logo" className="w-10 h-10 rounded-full object-contain" />
-                        <div>
-                          <div className="text-sm text-white font-semibold">Lathi</div>
-                          <div className="text-xs text-gray-400">E‑commerce site revamp</div>
+                    
+                    <div className="space-y-4 flex-1">
+                      {/* Project 1 */}
+                      <a 
+                        href="https://lathishop.com" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="block group"
+                      >
+                        <div className="rounded-xl bg-gradient-to-br from-[#1A1A1A] to-[#0F0F0F] border border-[#252525] p-4 hover:border-[#C2A68C]/40 transition-all duration-300">
+                          <div className="flex items-center gap-3 mb-2">
+                            <img 
+                              src="https://lathishop.com/assets/Logo.png" 
+                              alt="Lathi logo" 
+                              className="w-8 h-8 rounded-full object-cover border border-[#333]"
+                            />
+                            <div className="flex-1 min-w-0">
+                              <h4 className="text-sm font-medium text-white truncate">Lathi E-commerce</h4>
+                              <p className="text-xs text-gray-400 truncate">E-commerce Platform</p>
+                            </div>
+                            <span className="text-xs text-green-400">Live</span>
+                          </div>
+                          <p className="text-xs text-gray-300 line-clamp-2 mb-2">A modern e-commerce platform with seamless checkout and inventory management.</p>
+                          <div className="flex flex-wrap gap-1.5">
+                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#141414] border border-[#2a2a2a] text-gray-300">React</span>
+                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#141414] border border-[#2a2a2a] text-gray-300">Node.js</span>
+                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#141414] border border-[#2a2a2a] text-gray-300">MongoDB</span>
+                          </div>
                         </div>
-                      </div>
-                      <blockquote className="text-gray-300 text-sm leading-relaxed">
-                        “Speed went up, bounce went down. The handover was clean and the team shipped on time.”
-                      </blockquote>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        <span className="text-xs px-2.5 py-1 rounded-full bg-[#141414] border border-[#2a2a2a] text-gray-300">Lighthouse 98</span>
-                        <span className="text-xs px-2.5 py-1 rounded-full bg-[#141414] border border-[#2a2a2a] text-gray-300">99.9% uptime</span>
-                        <span className="text-xs px-2.5 py-1 rounded-full bg-[#141414] border border-[#2a2a2a] text-gray-300">TTFB &lt; 200ms</span>
-                      </div>
-                    </div>
+                      </a>
 
+                      {/* Project 2 */}
+                      <a 
+                        href="https://sted-founder.vercel.app/" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block group opacity-80 hover:opacity-100 transition-opacity"
+                      >
+                        <div className="rounded-xl bg-gradient-to-br from-[#1A1A1A] to-[#0F0F0F] border border-[#252525] p-4 hover:border-[#C2A68C]/40 transition-all duration-300">
+                          <div className="flex items-center gap-3 mb-2">
+                            <div className="w-8 h-8 rounded-full bg-[#1E1E1E] border border-[#333] flex items-center justify-center">
+                              <span className="text-xs font-medium text-[#C2A68C]">ST</span>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h4 className="text-sm font-medium text-white truncate">STED</h4>
+                              <p className="text-xs text-gray-400 truncate">Student Talent Enhancement</p>
+                            </div>
+                            <span className="text-xs text-green-400">Live</span>
+                          </div>
+                          <p className="text-xs text-gray-300 line-clamp-2 mb-2">Student Talent Enhancement and Development platform connecting students with industry mentors.</p>
+                          <div className="flex flex-wrap gap-1.5">
+                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#141414] border border-[#2a2a2a] text-gray-300">React</span>
+                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#141414] border border-[#2a2a2a] text-gray-300">Firebase</span>
+                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#141414] border border-[#2a2a2a] text-gray-300">Material-UI</span>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
                     
                   </div>
                 </motion.div>
@@ -439,7 +479,7 @@ const Landing = () => {
                 whileHover={{ y: -3, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Get a Free Quote
+                Let’s Talk
               </motion.a>
             </div>
           </div>

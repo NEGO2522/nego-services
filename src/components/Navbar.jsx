@@ -18,7 +18,7 @@ const Navbar = () => {
         </motion.div>
         
         <div className="hidden md:flex items-center space-x-10">
-          {['Services', 'About', 'Pricing'].map((item, index) => (
+          {['Services', 'About', 'Previous Builds'].map((item, index) => (
             <motion.div
               key={item}
               initial={{ opacity: 0, y: -10 }}
@@ -26,7 +26,7 @@ const Navbar = () => {
               transition={{ delay: 0.1 * index }}
             >
               <Link 
-                to={`/${item.toLowerCase()}`}
+                to={item === 'Previous Builds' ? '/projects' : `/${item.toLowerCase()}`}
                 className="relative group text-[#F5F5F0] hover:text-[#C2A68C] transition-colors duration-300 text-sm font-medium tracking-wider"
               >
                 {item}
@@ -37,7 +37,7 @@ const Navbar = () => {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: 0.4 }}
           >
             <Link 
               to="/contact"
