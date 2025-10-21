@@ -90,7 +90,7 @@ const ContactUs = () => {
 
                           <div className="flex space-x-4 pt-4 justify-center">
                             <a 
-                              href="https://instagram.com/nextgenova" 
+                              href="https://www.instagram.com/next.genova/" 
                               target="_blank" 
                               rel="noopener noreferrer"
                               className="text-gray-400 hover:text-[#E1306C] transition-colors"
@@ -99,7 +99,7 @@ const ContactUs = () => {
                               <FaInstagram size={20} />
                             </a>
                             <a 
-                              href="https://linkedin.com/company/nextgenova" 
+                              href="https://www.linkedin.com/company/netgenova" 
                               target="_blank" 
                               rel="noopener noreferrer" 
                               className="text-gray-500 hover:text-[#0077b5] transition-colors"
@@ -292,7 +292,7 @@ const ContactUs = () => {
                     <h4 className="text-lg font-semibold mb-4 text-[#C2A68C]">Follow Us</h4>
                     <div className="flex space-x-4">
                       <a 
-                        href="https://instagram.com/nextgenova" 
+                        href="https://www.instagram.com/next.genova/" 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         className="w-10 h-10 rounded-full bg-[#2d2d2d] flex items-center justify-center text-white hover:bg-[#E1306C] transition-all duration-300 transform hover:scale-110 cursor-pointer relative z-10" 
@@ -302,7 +302,7 @@ const ContactUs = () => {
                         <FaInstagram size={18} className="relative z-10" />
                       </a>
                       <a 
-                        href="https://linkedin.com/company/nextgenova" 
+                        href="https://www.linkedin.com/company/netgenova" 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         className="w-10 h-10 rounded-full bg-[#2d2d2d] flex items-center justify-center text-white hover:bg-[#0077b5] transition-all duration-300 transform hover:scale-110 cursor-pointer relative z-10" 
