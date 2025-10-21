@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet';
-import { FaGithub, FaLinkedin, FaTwitter, FaMapMarkerAlt, FaEnvelope, FaPhone, FaGlobe, FaWhatsapp, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaTwitter, FaMapMarkerAlt, FaEnvelope, FaPhone, FaGlobe, FaWhatsapp, FaExternalLinkAlt, FaInstagram } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
@@ -77,32 +77,44 @@ const ContactUs = () => {
                               <FaWhatsapp className="mr-2 text-[#25D366]" />
                               +91 87899 25958
                             </a>
+                            <a 
+                              href="https://wa.me/919719214408" 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="flex items-center text-sm text-gray-300 hover:text-[#25D366] transition-colors"
+                            >
+                              <FaWhatsapp className="mr-2 text-[#25D366]" />
+                              +91 9719214408
+                            </a>
                           </div>
 
                           <div className="flex space-x-4 pt-4 justify-center">
                             <a 
-                              href="https://github.com" 
+                              href="https://instagram.com/nextgenova" 
                               target="_blank" 
                               rel="noopener noreferrer"
-                              className="text-gray-400 hover:text-[#C2A68C] transition-colors"
+                              className="text-gray-400 hover:text-[#E1306C] transition-colors"
+                              title="Instagram"
                             >
-                              <FaGithub size={20} />
+                              <FaInstagram size={20} />
                             </a>
                             <a 
-                              href="https://linkedin.com" 
+                              href="https://linkedin.com/company/nextgenova" 
                               target="_blank" 
                               rel="noopener noreferrer" 
                               className="text-gray-500 hover:text-[#0077b5] transition-colors"
+                              title="LinkedIn"
                             >
                               <FaLinkedin size={20} />
                             </a>
                             <a 
-                              href="https://twitter.com" 
+                              href="https://wa.me/918789925958" 
                               target="_blank" 
                               rel="noopener noreferrer"
-                              className="text-gray-500 hover:text-[#1da1f2] transition-colors"
+                              className="text-gray-500 hover:text-[#25D366] transition-colors"
+                              title="WhatsApp"
                             >
-                              <FaTwitter size={20} />
+                              <FaWhatsapp size={20} />
                             </a>
                           </div>
                         </div>
@@ -111,7 +123,7 @@ const ContactUs = () => {
                   </div>
                 
                   <motion.a
-                    href="https://wa.me/919413973399"
+                    href="https://wa.me/918789925958"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center"
@@ -124,7 +136,7 @@ const ContactUs = () => {
                   {/* Connect with our Team */}
                   <div className="mt-8">
                     <h3 className="text-xl font-bold text-[#C2A68C] mb-6 text-center">Connect with our Team</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                       {/* Team Member 1 */}
                       <div className="bg-[#2d2d2d] p-6 rounded-xl shadow-lg border border-[#3d3d3d] hover:border-[#C2A68C]/50 transition-all duration-300">
                         <div className="flex flex-col items-center text-center space-y-4">
@@ -186,6 +198,37 @@ const ContactUs = () => {
                           </div>
                         </div>
                       </div>
+
+                      {/* Team Member 3 */}
+                      <div className="bg-[#2d2d2d] p-6 rounded-xl shadow-lg border border-[#3d3d3d] hover:border-[#C2A68C]/50 transition-all duration-300">
+                        <div className="flex flex-col items-center text-center space-y-4">
+                          <div className="w-24 h-24 rounded-full bg-[#C2A68C] flex items-center justify-center text-3xl font-bold text-[#1a1a1a] mb-3">
+                            HA
+                          </div>
+                          <div className="w-full">
+                            <h4 className="text-xl font-semibold text-white mb-1">Harsh Agrawal</h4>
+                            <p className="text-[#C2A68C] font-medium mb-4">Team Member</p>
+                            <div className="flex justify-center space-x-4">
+                              <a 
+                                href="https://wa.me/919719214408" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="text-[#25D366] hover:text-[#128C7E] transition-all transform hover:scale-110"
+                                title="WhatsApp"
+                              >
+                                <FaWhatsapp size={18} />
+                              </a>
+                              <a 
+                                href="mailto:harshagrawal7878@gmail.com" 
+                                className="text-gray-400 hover:text-[#C2A68C] transition-all transform hover:scale-110"
+                                title="Email"
+                              >
+                                <FaEnvelope size={18} />
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </form>
@@ -200,42 +243,83 @@ const ContactUs = () => {
               </div>
             
               {/* Contact Info Card */}
-              <div className="space-y-6 lg:col-span-2">
-                <div className="bg-[#1a1a1a] rounded-2xl p-6 shadow-lg border border-[#333] text-white">
+              <div className="space-y-6 lg:col-span-2 relative z-10">
+                <div className="bg-[#1a1a1a] rounded-2xl p-6 shadow-lg border border-[#333] text-white relative z-10">
                   <h3 className="text-xl font-bold mb-6 text-[#C2A68C] flex items-center">
                     <FaMapMarkerAlt className="mr-2" /> Our Location
                   </h3>
-                  <div className="space-y-4">
+                  <div className="space-y-4 relative z-10">
                     <div className="flex items-start">
                       <FaMapMarkerAlt className="text-[#C2A68C] mt-1 mr-3 flex-shrink-0" />
                       <p>Poornima University,<br />IS-2027-34, Ramchandrapura,<br />Vidhani, Sitapura Extension,<br />Jaipur, Rajasthan 303905</p>
                     </div>
                     <div className="flex items-center">
                       <FaEnvelope className="text-[#C2A68C] mr-3" />
-                      <a href="mailto:info@poornima.org" className="hover:text-[#C2A68C] transition-colors">info@poornima.org</a>
+                      <a 
+                        href="mailto:nextgenova28@gmail.com" 
+                        className="hover:text-[#C2A68C] transition-colors relative z-10"
+                        style={{ position: 'relative', zIndex: 10 }}
+                      >
+                        nextgenova28@gmail.com
+                      </a>
                     </div>
                     <div className="flex items-center">
                       <FaPhone className="text-[#C2A68C] mr-3" />
-                      <a href="tel:+911412779777" className="hover:text-[#C2A68C] transition-colors">+91 141 277 9777</a>
+                      <a 
+                        href="tel:+91 8789925958" 
+                        className="hover:text-[#C2A68C] transition-colors relative z-10"
+                        style={{ position: 'relative', zIndex: 10 }}
+                      >
+                        +91 8789925958
+                      </a>
                     </div>
                     <div className="flex items-center">
                       <FaGlobe className="text-[#C2A68C] mr-3" />
-                      <a href="https://poornima.edu.in" target="_blank" rel="noopener noreferrer" className="hover:text-[#C2A68C] transition-colors">poornima.edu.in</a>
+                      <a 
+                        href="https://nego-services.vercel.app" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="hover:text-[#C2A68C] transition-colors relative z-10"
+                        style={{ position: 'relative', zIndex: 10 }}
+                      >
+                        NextGenOva
+                      </a>
                     </div>
                   </div>
                   
                   {/* Social Media Links */}
-                  <div className="mt-8">
+                  <div className="mt-8 relative z-10">
                     <h4 className="text-lg font-semibold mb-4 text-[#C2A68C]">Follow Us</h4>
                     <div className="flex space-x-4">
-                      <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#2d2d2d] flex items-center justify-center text-white hover:bg-[#C2A68C] transition-colors" aria-label="GitHub">
-                        <FaGithub size={18} />
+                      <a 
+                        href="https://instagram.com/nextgenova" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="w-10 h-10 rounded-full bg-[#2d2d2d] flex items-center justify-center text-white hover:bg-[#E1306C] transition-all duration-300 transform hover:scale-110 cursor-pointer relative z-10" 
+                        aria-label="Instagram"
+                        style={{ position: 'relative', zIndex: 10 }}
+                      >
+                        <FaInstagram size={18} className="relative z-10" />
                       </a>
-                      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#2d2d2d] flex items-center justify-center text-white hover:bg-[#0077b5] transition-colors" aria-label="LinkedIn">
-                        <FaLinkedin size={18} />
+                      <a 
+                        href="https://linkedin.com/company/nextgenova" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="w-10 h-10 rounded-full bg-[#2d2d2d] flex items-center justify-center text-white hover:bg-[#0077b5] transition-all duration-300 transform hover:scale-110 cursor-pointer relative z-10" 
+                        aria-label="LinkedIn"
+                        style={{ position: 'relative', zIndex: 10 }}
+                      >
+                        <FaLinkedin size={18} className="relative z-10" />
                       </a>
-                      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#2d2d2d] flex items-center justify-center text-white hover:bg-[#1da1f2] transition-colors" aria-label="Twitter">
-                        <FaTwitter size={18} />
+                      <a 
+                        href="https://wa.me/918789925958" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="w-10 h-10 rounded-full bg-[#2d2d2d] flex items-center justify-center text-white hover:bg-[#25D366] transition-all duration-300 transform hover:scale-110 cursor-pointer relative z-10" 
+                        aria-label="WhatsApp"
+                        style={{ position: 'relative', zIndex: 10 }}
+                      >
+                        <FaWhatsapp size={18} className="relative z-10" />
                       </a>
                     </div>
                   </div>

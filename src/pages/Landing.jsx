@@ -203,19 +203,22 @@ const Landing = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.7, duration: 0.8 }}
                 >
-                  <motion.button 
+                  <motion.a 
+                    href="https://wa.me/918789925958" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
                     className="group relative px-7 py-3.5 bg-gradient-to-r from-[#C2A68C] to-[#E6D8C3] text-[#0A0A0A] font-medium rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-[#C2A68C]/30"
                     whileHover={{ y: -2, scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
                     <span className="relative z-10 flex items-center">
-                      Get Started
+                      Let's Talk
                       <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                       </svg>
                     </span>
                     <span className="absolute inset-0 bg-white/10 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                  </motion.button>
+                  </motion.a>
                   
                   <motion.a 
                     href="/services"
@@ -474,12 +477,14 @@ const Landing = () => {
                 <p className="text-gray-400 mt-2">Tell us about your idea and we’ll craft a plan to bring it to life.</p>
               </div>
               <motion.a 
-                href="/contact"
+                href="https://wa.me/918789925958"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#C2A68C] to-[#E6D8C3] text-[#0A0A0A] font-medium rounded-full hover:shadow-lg hover:shadow-[#C2A68C]/30 transition-all duration-300"
                 whileHover={{ y: -3, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Let’s Talk
+                Let's Talk
               </motion.a>
             </div>
           </div>
