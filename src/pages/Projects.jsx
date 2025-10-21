@@ -188,94 +188,98 @@ const Projects = () => {
         <section className="mb-24">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project) => (
-              <motion.div
+              <a
                 key={project.id}
-                className="project-card group relative rounded-2xl border border-[#2a2a2a] bg-[#111111]/60 backdrop-blur-md p-6 overflow-hidden h-full flex flex-col"
-                whileHover={{ y: -5, transition: { duration: 0.3 } }}
+                href={project.links.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
               >
-                <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#C2A68C]/10 rounded-full blur-3xl"></div>
-                <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-[#E6D8C3]/10 rounded-full blur-3xl"></div>
+                <motion.div
+                  className="project-card group relative rounded-2xl border border-[#2a2a2a] bg-[#111111]/60 backdrop-blur-md p-6 overflow-hidden h-full flex flex-col"
+                  whileHover={{ y: -5, transition: { duration: 0.3 } }}
+                >
+                  <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#C2A68C]/10 rounded-full blur-3xl"></div>
+                  <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-[#E6D8C3]/10 rounded-full blur-3xl"></div>
 
-                <div className="relative z-10 flex-1 flex flex-col">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      {project.image ? (
-                        <img
-                          src={project.image}
-                          alt={project.title}
-                          className="w-10 h-10 rounded-full object-cover border border-[#333]"
-                        />
-                      ) : (
-                        <div className="w-10 h-10 rounded-full bg-[#1E1E1E] border border-[#333] flex items-center justify-center">
-                          <span className="text-sm font-medium text-[#C2A68C]">
-                            {project.title
-                              .split(' ')
-                              .map((word) => word[0])
-                              .join('')
-                              .substring(0, 2)
-                              .toUpperCase()}
-                          </span>
+                  <div className="relative z-10 flex-1 flex flex-col">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        {project.image ? (
+                          <img
+                            src={project.image}
+                            alt={project.title}
+                            className="w-10 h-10 rounded-full object-cover border border-[#333]"
+                          />
+                        ) : (
+                          <div className="w-10 h-10 rounded-full bg-[#1E1E1E] border border-[#333] flex items-center justify-center">
+                            <span className="text-sm font-medium text-[#C2A68C]">
+                              {project.title
+                                .split(' ')
+                                .map((word) => word[0])
+                                .join('')
+                                .substring(0, 2)
+                                .toUpperCase()}
+                            </span>
+                          </div>
+                        )}
+                        <div>
+                          <h3 className="text-lg font-semibold text-white">{project.title}</h3>
+                          {getStatusBadge(project.status)}
                         </div>
+                      </div>
+                      {project.featured && (
+                        <span className="inline-flex items-center text-xs px-2 py-1 rounded-full bg-[#C2A68C]/10 text-[#C2A68C] border border-[#C2A68C]/20">
+                          <FaStar className="mr-1" size={10} /> Featured
+                        </span>
                       )}
-                      <div>
-                        <h3 className="text-lg font-semibold text-white">{project.title}</h3>
-                        {getStatusBadge(project.status)}
+                    </div>
+
+                    <p className="text-gray-300 text-sm mb-4 flex-1">{project.description}</p>
+
+                    <div className="mt-4 flex flex-wrap gap-2 mb-4">
+                      {project.tags.map((tag, index) => (
+                        <span
+                          key={index}
+                          className="text-[10px] px-2 py-0.5 rounded-full bg-[#141414] border border-[#2a2a2a] text-gray-300"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="mt-auto pt-4 border-t border-[#252525] flex items-center justify-between">
+                      {project.status === 'live' && project.links.live ? (
+                        <div
+                          className="group flex items-center text-[#C2A68C] hover:text-[#E6D8C3] transition-colors"
+                          title="Visit Live Site"
+                        >
+                          <div className="flex items-center">
+                            <div className="relative">
+                              <div className="w-2 h-2 rounded-full bg-green-500 mr-2"></div>
+                              <div className="absolute top-0 left-0 w-2 h-2 rounded-full bg-green-500 animate-ping"></div>
+                            </div>
+                            <span className="text-xs font-medium">Live</span>
+                          </div>
+                        </div>
+                      ) : (
+                        <span className="text-xs text-gray-500">
+                          {project.status === 'in-progress' ? 'In Development' : 'Coming Soon'}
+                        </span>
+                      )}
+                      <div className="flex items-center space-x-1">
+                        <FaCode className="text-gray-500" size={12} />
+                        <FaServer className="text-gray-500" size={12} />
+                        {project.tags.includes('React Native') && <FaMobile className="text-gray-500" size={12} />}
+                        {project.tags.includes('OpenAI') && <FaRobot className="text-gray-500" size={12} />}
+                        {project.tags.includes('MongoDB') || project.tags.includes('PostgreSQL') ? (
+                          <FaDatabase className="text-gray-500" size={12} />
+                        ) : null}
                       </div>
                     </div>
-                    {project.featured && (
-                      <span className="inline-flex items-center text-xs px-2 py-1 rounded-full bg-[#C2A68C]/10 text-[#C2A68C] border border-[#C2A68C]/20">
-                        <FaStar className="mr-1" size={10} /> Featured
-                      </span>
-                    )}
                   </div>
-
-                  <p className="text-gray-300 text-sm mb-4 flex-1">{project.description}</p>
-
-                  <div className="mt-4 flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag, index) => (
-                      <span
-                        key={index}
-                        className="text-[10px] px-2 py-0.5 rounded-full bg-[#141414] border border-[#2a2a2a] text-gray-300"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="mt-auto pt-4 border-t border-[#252525] flex items-center justify-between">
-                    {project.status === 'live' && project.links.live ? (
-                      <a
-                        href={project.links.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group flex items-center text-[#C2A68C] hover:text-[#E6D8C3] transition-colors"
-                        title="Visit Live Site"
-                      >
-                        <div className="flex items-center">
-                          <div className="relative">
-                            <div className="w-2 h-2 rounded-full bg-green-500 mr-2"></div>
-                            <div className="absolute top-0 left-0 w-2 h-2 rounded-full bg-green-500 animate-ping"></div>
-                          </div>
-                          <span className="text-xs font-medium">Live</span>
-                        </div>
-                      </a>
-                    ) : (
-                      <span className="text-xs text-gray-500">
-                        {project.status === 'in-progress' ? 'In Development' : 'Coming Soon'}
-                      </span>
-                    )}
-                    <div className="flex items-center space-x-1">
-                      <FaCode className="text-gray-500" size={12} />
-                      <FaServer className="text-gray-500" size={12} />
-                      {project.tags.includes('React Native') && <FaMobile className="text-gray-500" size={12} />}
-                      {project.tags.includes('OpenAI') && <FaRobot className="text-gray-500" size={12} />}
-                      {project.tags.includes('MongoDB') || project.tags.includes('PostgreSQL') ? (
-                        <FaDatabase className="text-gray-500" size={12} />
-                      ) : null}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
+                </motion.div>
+              </a>
             ))}
           </div>
         </section>
