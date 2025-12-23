@@ -156,7 +156,7 @@ const Projects = () => {
 
       <Helmet>
         <title>Previous Builds - NEGO</title>
-        <meta name="description" content="Explore our portfolio of successful projects and case studies." />
+        <meta name="description" content="Explore our portfolio of successful projects." />
         <link rel="icon" href="/favicon.ico" />
       </Helmet>
 
@@ -172,7 +172,7 @@ const Projects = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Case <span className="bg-gradient-to-r from-[#C2A68C] to-[#E6D8C3] bg-clip-text text-transparent">Studies</span>
+            Previous <span className="bg-gradient-to-r from-[#C2A68C] to-[#E6D8C3] bg-clip-text text-transparent">Builds</span>
           </motion.h1>
           <motion.p
             className="text-lg text-gray-400 max-w-2xl mx-auto"

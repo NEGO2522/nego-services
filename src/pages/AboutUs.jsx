@@ -70,9 +70,9 @@ const AboutUs = () => {
                 
                 <div className="grid grid-cols-2 gap-4 mt-8">
                   {[
-                    { number: '50+', label: 'Projects Completed' },
-                    { number: '95%', label: 'Client Satisfaction' },
-                    { number: '10+', label: 'Years Experience' },
+                    { number: '10+', label: 'Projects Completed' },
+                    { number: '85%', label: 'Client Satisfaction' },
+                    { number: '1+', label: 'Years Experience' },
                     { number: '100%', label: 'Dedication' }
                   ].map((stat, index) => (
                     <motion.div 
@@ -112,7 +112,7 @@ const AboutUs = () => {
                 <img 
                   src="/favicon.png" 
                   alt="NEGO Team" 
-                  className="w-full h-full object-cover transform transition-transform duration-700 hover:scale-105"
+                  className="w-full h-full  transform transition-transform duration-700 hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent opacity-80"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
