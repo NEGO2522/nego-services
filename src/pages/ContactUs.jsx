@@ -69,22 +69,13 @@ const ContactUs = () => {
                               +91 94139 73399
                             </a>
                             <a 
-                              href="https://wa.me/918789925958" 
+                              href="https://wa.me/917742971455" 
                               target="_blank" 
                               rel="noopener noreferrer"
                               className="flex items-center text-sm text-gray-300 hover:text-[#25D366] transition-colors"
                             >
                               <FaWhatsapp className="mr-2 text-[#25D366]" />
-                              +91 87899 25958
-                            </a>
-                            <a 
-                              href="https://wa.me/919719214408" 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="flex items-center text-sm text-gray-300 hover:text-[#25D366] transition-colors"
-                            >
-                              <FaWhatsapp className="mr-2 text-[#25D366]" />
-                              +91 9719214408
+                              +91 77429 71455
                             </a>
                           </div>
 
@@ -108,7 +99,7 @@ const ContactUs = () => {
                               <FaLinkedin size={20} />
                             </a>
                             <a 
-                              href="https://wa.me/918789925958" 
+                              href="https://wa.me/919413973399" 
                               target="_blank" 
                               rel="noopener noreferrer"
                               className="text-gray-500 hover:text-[#25D366] transition-colors"
@@ -123,7 +114,7 @@ const ContactUs = () => {
                   </div>
                 
                   <motion.a
-                    href="https://wa.me/918789925958"
+                    href="https://wa.me/919413973399"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center"
@@ -136,7 +127,7 @@ const ContactUs = () => {
                   {/* Connect with our Team */}
                   <div className="mt-8">
                     <h3 className="text-xl font-bold text-[#C2A68C] mb-6 text-center">Connect with our Team</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                       {/* Team Member 1 */}
                       <div className="bg-[#2d2d2d] p-6 rounded-xl shadow-lg border border-[#3d3d3d] hover:border-[#C2A68C]/50 transition-all duration-300">
                         <div className="flex flex-col items-center text-center space-y-4">
@@ -167,19 +158,19 @@ const ContactUs = () => {
                           </div>
                         </div>
                       </div>
-
-                      {/* Team Member 2 */}
+                      
+                      {/* Team Member 2 - Anil Kumar */}
                       <div className="bg-[#2d2d2d] p-6 rounded-xl shadow-lg border border-[#3d3d3d] hover:border-[#C2A68C]/50 transition-all duration-300">
                         <div className="flex flex-col items-center text-center space-y-4">
                           <div className="w-24 h-24 rounded-full bg-[#C2A68C] flex items-center justify-center text-3xl font-bold text-[#1a1a1a] mb-3">
-                            MK
+                            AK
                           </div>
                           <div className="w-full">
-                            <h4 className="text-xl font-semibold text-white mb-1">Manish Kumar</h4>
+                            <h4 className="text-xl font-semibold text-white mb-1">Anil Kumar</h4>
                             <p className="text-[#C2A68C] font-medium mb-4">Team Member</p>
                             <div className="flex justify-center space-x-4">
                               <a 
-                                href="https://wa.me/918789925958" 
+                                href="https://wa.me/917742971455" 
                                 target="_blank" 
                                 rel="noopener noreferrer"
                                 className="text-[#25D366] hover:text-[#128C7E] transition-all transform hover:scale-110"
@@ -189,37 +180,6 @@ const ContactUs = () => {
                               </a>
                               <a 
                                 href="mailto:nextgenova28@gmail.com" 
-                                className="text-gray-400 hover:text-[#C2A68C] transition-all transform hover:scale-110"
-                                title="Email"
-                              >
-                                <FaEnvelope size={18} />
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Team Member 3 */}
-                      <div className="bg-[#2d2d2d] p-6 rounded-xl shadow-lg border border-[#3d3d3d] hover:border-[#C2A68C]/50 transition-all duration-300">
-                        <div className="flex flex-col items-center text-center space-y-4">
-                          <div className="w-24 h-24 rounded-full bg-[#C2A68C] flex items-center justify-center text-3xl font-bold text-[#1a1a1a] mb-3">
-                            HA
-                          </div>
-                          <div className="w-full">
-                            <h4 className="text-xl font-semibold text-white mb-1">Harsh Agrawal</h4>
-                            <p className="text-[#C2A68C] font-medium mb-4">Team Member</p>
-                            <div className="flex justify-center space-x-4">
-                              <a 
-                                href="https://wa.me/919719214408" 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="text-[#25D366] hover:text-[#128C7E] transition-all transform hover:scale-110"
-                                title="WhatsApp"
-                              >
-                                <FaWhatsapp size={18} />
-                              </a>
-                              <a 
-                                href="mailto:harshagrawal7878@gmail.com" 
                                 className="text-gray-400 hover:text-[#C2A68C] transition-all transform hover:scale-110"
                                 title="Email"
                               >
@@ -266,11 +226,11 @@ const ContactUs = () => {
                     <div className="flex items-center">
                       <FaPhone className="text-[#C2A68C] mr-3" />
                       <a 
-                        href="tel:+91 8789925958" 
+                        href="tel:+91 9413973399" 
                         className="hover:text-[#C2A68C] transition-colors relative z-10"
                         style={{ position: 'relative', zIndex: 10 }}
                       >
-                        +91 8789925958
+                        +91 94139 73399
                       </a>
                     </div>
                     <div className="flex items-center">
@@ -312,7 +272,7 @@ const ContactUs = () => {
                         <FaLinkedin size={18} className="relative z-10" />
                       </a>
                       <a 
-                        href="https://wa.me/918789925958" 
+                        href="https://wa.me/919413973399" 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         className="w-10 h-10 rounded-full bg-[#2d2d2d] flex items-center justify-center text-white hover:bg-[#25D366] transition-all duration-300 transform hover:scale-110 cursor-pointer relative z-10" 

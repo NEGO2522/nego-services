@@ -204,7 +204,7 @@ const Landing = () => {
                   transition={{ delay: 0.7, duration: 0.8 }}
                 >
                   <motion.a 
-                    href="https://wa.me/918789925958" 
+                    href="https://wa.me/919413973399" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="group relative px-7 py-3.5 bg-gradient-to-r from-[#C2A68C] to-[#E6D8C3] text-[#0A0A0A] font-medium rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-[#C2A68C]/30"
@@ -477,7 +477,7 @@ const Landing = () => {
                 <p className="text-gray-400 mt-2">Tell us about your idea and we’ll craft a plan to bring it to life.</p>
               </div>
               <motion.a 
-                href="https://wa.me/918789925958"
+                href="https://wa.me/919413973399"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#C2A68C] to-[#E6D8C3] text-[#0A0A0A] font-medium rounded-full hover:shadow-lg hover:shadow-[#C2A68C]/30 transition-all duration-300"
