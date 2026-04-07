@@ -150,7 +150,7 @@ const Navbar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-40 md:hidden"
+            className="fixed inset-0 z-[60] md:hidden"
             style={{ background: 'rgba(255,255,255,0.97)', backdropFilter: 'blur(24px)' }}
           >
             {/* Subtle dot pattern */}
@@ -164,13 +164,16 @@ const Navbar = () => {
             />
 
             <div className="relative z-10 flex flex-col justify-center flex-1 h-full px-8 gap-1">
-              {/* Logo in menu */}
-              <div className="flex items-center gap-2.5 mb-10">
-                <div className="w-9 h-9 rounded-xl bg-black flex items-center justify-center">
-                  <span className="text-white font-black text-sm">N</span>
-                </div>
-                <span className="font-bold text-lg text-black tracking-tight">NEGO<span className="text-neutral-300">.</span></span>
-              </div>
+              {/* Close button top-right */}
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="absolute top-5 right-5 w-10 h-10 rounded-xl bg-black/6 flex items-center justify-center"
+                aria-label="Close menu"
+              >
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
 
               {navLinks.map((link, i) => (
                 <motion.div
