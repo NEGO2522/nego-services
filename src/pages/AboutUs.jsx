@@ -1,143 +1,131 @@
-import { motion } from 'framer-motion';
+import { useEffect } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Helmet } from 'react-helmet';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-const AboutUs = () => {
+const fadeUp = (delay = 0) => ({
+  hidden: { opacity: 0, y: 32 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] } },
+});
+
+const GridBg = ({ opacity = 0.5, size = 48 }) => (
+  <div className="absolute inset-0 pointer-events-none"
+    style={{
+      backgroundImage: `linear-gradient(rgba(0,0,0,${opacity * 0.1}) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,${opacity * 0.1}) 1px, transparent 1px)`,
+      backgroundSize: `${size}px ${size}px`
+    }} />
+);
+
+const SectionLabel = ({ children }) => (
+  <p className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/5 text-[10px] font-bold tracking-[0.2em] uppercase text-black mb-6 border border-black/5">
+    <span className="w-1.5 h-1.5 rounded-full bg-black animate-pulse" />
+    {children}
+  </p>
+);
+
+const STATS = [
+  { label: 'Projects Shipped',    value: '10+'  },
+  { label: 'Client Satisfaction', value: '100%' },
+  { label: 'Years Experience',    value: '1+'   },
+  { label: 'Lines of Code',       value: '1M+'  },
+];
+
+export default function AboutUs() {
+  const { scrollYProgress } = useScroll();
+  const yBg = useTransform(scrollYProgress, [0, 1], [0, -100]);
+
+  useEffect(() => { window.scrollTo(0, 0); }, []);
+
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-white relative overflow-hidden">
-      {/* Background grid */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div 
-          className="absolute inset-0"
-          style={{
-            backgroundImage: 'linear-gradient(to right, #1F1F1F 1px, transparent 1px), linear-gradient(to bottom, #1F1F1F 1px, transparent 1px)',
-            backgroundSize: '128px 128px',
-            opacity: 0.2
-          }}
-        ></div>
-      </div>
-
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#C2A68C]/10 via-black to-[#E6D8C3]/10"></div>
-
+    <div className="min-h-screen bg-[#fafafa] font-sans selection:bg-black selection:text-white">
       <Helmet>
-        <title>About Us - NEGO</title>
+        <title>About Us — NEGO</title>
         <meta name="description" content="Learn about NEGO – who we are, our mission, and our impact." />
-        <link rel="icon" href="/favicon.ico" />
       </Helmet>
 
       <Navbar />
 
-      <main className="container mx-auto px-6 pt-8 pb-20 relative z-10">
-        {/* Page header */}
-        <motion.div 
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="text-sm font-medium text-[#C2A68C] uppercase tracking-wider mb-3 inline-block">Who We Are</span>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">About <span className="text-[#C2A68C]">NEGO</span></h1>
-          <div className="w-20 h-1 bg-gradient-to-r from-[#C2A68C] to-[#E6D8C3] mx-auto"></div>
+      <main className="relative pt-36 pb-24 overflow-hidden">
+        <motion.div style={{ y: yBg }} className="absolute inset-0 z-0">
+          <GridBg opacity={0.6} size={48} />
         </motion.div>
 
-        {/* Content adapted from Landing.jsx About section */}
-        <motion.section 
-          className="py-4 relative overflow-hidden"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-        >
-          {/* Decorative elements */}
-          <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#C2A68C]/10 rounded-full mix-blend-multiply filter blur-3xl"></div>
-          <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-[#E6D8C3]/10 rounded-full mix-blend-multiply filter blur-3xl"></div>
-          
-          <div className="max-w-7xl mx-auto px-0 relative z-10">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <motion.div 
-                className="space-y-6"
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-              >
-                <h3 className="text-2xl md:text-3xl font-bold text-white leading-tight">
-                  Transforming Ideas Into <span className="text-[#C2A68C]">Digital Reality</span>
-                </h3>
-                <p className="text-gray-300 text-lg leading-relaxed">
-                  NEGO is a full-stack tech service hub dedicated to helping businesses and students transform their innovative ideas into reality. With our expertise in cutting-edge technologies and passion for problem-solving, we deliver high-quality, scalable solutions tailored to your unique needs.
+        <div className="absolute inset-0 pointer-events-none z-0"
+          style={{ background: 'radial-gradient(ellipse 80% 90% at 50% -10%, #fff 0%, transparent 80%)' }} />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6">
+
+          {/* Hero row */}
+          <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-center">
+
+            {/* Left */}
+            <motion.div
+              className="lg:col-span-6 flex flex-col items-start text-left"
+              initial="hidden" animate="show" variants={fadeUp(0)}
+            >
+              <SectionLabel>Who We Are</SectionLabel>
+              <h1 className="font-black text-black leading-[1.05] tracking-tight mb-8"
+                style={{ fontSize: 'clamp(3rem, 5vw, 4.5rem)', letterSpacing: '-0.04em' }}>
+                Transforming ideas into{' '}
+                <br className="hidden md:block" />
+                <span className="text-black/25">digital reality.</span>
+              </h1>
+
+              <div className="space-y-5 text-[16px] md:text-[17px] text-black/50 leading-[1.8] max-w-lg mb-10">
+                <p>
+                  NEGO is a full-stack tech engineering hub dedicated to helping businesses, creators, and founders transform their innovative ideas into production-ready platforms.
                 </p>
-                
-                <div className="grid grid-cols-2 gap-4 mt-8">
-                  {[
-                    { number: '10+', label: 'Projects Completed' },
-                    { number: '85%', label: 'Client Satisfaction' },
-                    { number: '1+', label: 'Years Experience' },
-                    { number: '100%', label: 'Dedication' }
-                  ].map((stat, index) => (
-                    <motion.div 
-                      key={index}
-                      className="bg-[#1A1A1A] p-4 rounded-xl border border-[#252525] hover:border-[#C2A68C]/30 transition-colors duration-300"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: 0.1 * index }}
-                    >
-                      <div className="text-2xl font-bold text-[#C2A68C] mb-1">{stat.number}</div>
-                      <div className="text-sm text-gray-400">{stat.label}</div>
-                    </motion.div>
-                  ))}
-                </div>
-                
-                <motion.a
-                  href="/contact"
-                  className="inline-flex items-center px-8 py-3.5 mt-6 bg-gradient-to-r from-[#C2A68C] to-[#E6D8C3] text-[#0A0A0A] font-medium rounded-full hover:shadow-lg hover:shadow-[#C2A68C]/30 transition-all duration-300 group"
-                  whileHover={{ y: -3, scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Get in Touch
-                  <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                <p>
+                  We don't just write code — we architect solutions. With our expertise in cutting-edge web and mobile technologies, we deliver highly scalable, pixel-perfect software tailored strictly to your unique business logic. No templates. No shortcuts.
+                </p>
+              </div>
+
+              <motion.a
+                href="https://wa.me/919413973399" target="_blank" rel="noopener noreferrer"
+                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold text-white bg-black hover:bg-black/80 transition-colors text-[14px]"
+                whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                Connect with our team
+                <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
                   </svg>
-                </motion.a>
-              </motion.div>
-              
-              <motion.div 
-                className="relative h-96 rounded-2xl overflow-hidden shadow-2xl border border-[#C2A68C]/20 bg-[#1A1A1A]"
-                initial={{ opacity: 0, x: 30, rotate: 2 }}
-                animate={{ opacity: 1, x: 0, rotate: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                whileHover={{ y: -10 }}
-              >
-                <img 
-                  src="/favicon.png" 
-                  alt="NEGO Team" 
-                  className="w-full h-full  transform transition-transform duration-700 hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent opacity-80"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                  <motion.div 
-                    className="bg-[#C2A68C] text-[#0A0A0A] px-4 py-2 rounded-full inline-flex items-center text-sm font-medium mb-4"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.6 }}
-                  >
-                    <span className="w-2 h-2 bg-[#0A0A0A] rounded-full mr-2"></span>
-                    Our Mission
-                  </motion.div>
-                  <h3 className="text-2xl font-bold mb-2">Empowering Innovation Through Technology</h3>
-                  <p className="text-gray-300">Delivering exceptional solutions that drive business growth and success.</p>
-                </div>
-              </motion.div>
+                </span>
+              </motion.a>
+            </motion.div>
+
+            {/* Right — stat bento */}
+            <div className="lg:col-span-6 grid grid-cols-2 gap-4 relative">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-black/5 blur-3xl pointer-events-none rounded-full" />
+              {STATS.map((stat, i) => (
+                <motion.div key={i}
+                  initial={{ opacity: 0, scale: 0.92, y: 16 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.55, delay: 0.1 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  className={`relative p-8 md:p-10 bg-white border border-black/8 rounded-[2rem] flex flex-col justify-end overflow-hidden group hover:border-black/20 transition-colors ${i === 0 || i === 3 ? 'aspect-square' : 'aspect-[4/3]'}`}
+                  style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.04)' }}>
+                  <div className="absolute inset-0 bg-black/[0.02] opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+                    style={{
+                      backgroundImage: 'linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px)',
+                      backgroundSize: '24px 24px',
+                    }} />
+                  <div className="relative text-[clamp(2.5rem,4vw,3.5rem)] font-black leading-none text-black mb-3 tracking-tighter">
+                    {stat.value}
+                  </div>
+                  <div className="relative text-[12px] font-bold uppercase tracking-widest text-black/35">
+                    {stat.label}
+                  </div>
+                </motion.div>
+              ))}
             </div>
+
           </div>
-        </motion.section>
+        </div>
       </main>
 
       <Footer />
     </div>
   );
-};
-
-export default AboutUs;
+}

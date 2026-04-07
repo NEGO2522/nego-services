@@ -1,331 +1,190 @@
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Helmet } from 'react-helmet';
-import { FaGithub, FaExternalLinkAlt, FaStar, FaCode, FaServer, FaMobile, FaRobot, FaDatabase } from 'react-icons/fa';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
+const fadeUp = (delay = 0) => ({
+  hidden: { opacity: 0, y: 32 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] } },
+});
 
-const Projects = () => {
-  const [isVisible, setIsVisible] = useState(false);
+const GridBg = ({ opacity = 0.5, size = 48 }) => (
+  <div className="absolute inset-0 pointer-events-none"
+    style={{
+      backgroundImage: `linear-gradient(rgba(0,0,0,${opacity * 0.1}) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,${opacity * 0.1}) 1px, transparent 1px)`,
+      backgroundSize: `${size}px ${size}px`
+    }} />
+);
 
-  // Projects data
-  const projects = [
-    {
-      id: 1,
-      title: 'Lathi E-commerce',
-      description: 'A modern e-commerce platform with seamless checkout and inventory management system built with MERN stack.',
-      image: 'https://lathishop.com/assets/Logo.png',
-      tags: ['React', 'Node.js', 'MongoDB', 'Express'],
-      status: 'live',
-      links: {
-        live: 'https://lathishop.com',
-        github: '#'
-      },
-      featured: true
-    },
-    {
-      id: 3,
-      title: 'Campus League',
-      description: 'A platform for college students to participate in coding competitions and hackathons.',
-      image: 'https://www.campusleauge.in/football-icon.svg',
-      tags: ['React', 'Node.js', 'MongoDB', 'WebSockets'],
-      status: 'live',
-      links: {
-        live: 'https://www.campusleauge.in',
-        github: '#'
-      },
-      featured: true
-    },
-    {
-      id: 4,
-      title: 'STED Platform',
-      description: 'Student Talent Enhancement and Development platform connecting students with industry mentors.',
-      image: null,
-      tags: ['React', 'Firebase', 'Material-UI'],
-      status: 'live',
-      links: {
-        live: 'https://sted-founder.vercel.app',
-        github: '#'
-      },
-      featured: true
-    }
-  ];
+const SectionLabel = ({ children }) => (
+  <p className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/5 text-[10px] font-bold tracking-[0.2em] uppercase text-black mb-6 border border-black/5">
+    <span className="w-1.5 h-1.5 rounded-full bg-black animate-pulse" />
+    {children}
+  </p>
+);
 
-  // Initialize GSAP animations
+const PROJECTS_LIST = [
+  { id: '1', title: 'Lathi E-commerce', desc: 'A modern e-commerce platform with seamless checkout and inventory management system built with MERN stack.', tags: ['React', 'Node.js', 'MongoDB'], status: 'live', link: 'https://lathishop.com', icon: '🛍️' },
+  { id: '2', title: 'Campus League', desc: 'A platform for college students to participate in coding competitions and hackathons.', tags: ['React', 'Node', 'Sockets'], status: 'live', link: 'https://www.campusleauge.in', icon: '⚽' },
+  { id: '3', title: 'STED Platform', desc: 'Student Talent Enhancement and Development platform connecting students with industry mentors.', tags: ['React', 'Firebase', 'MUI'], status: 'live', link: 'https://sted-founder.vercel.app', icon: '🎓' },
+  { id: '4', title: 'Linkaura', desc: 'Modern connectivity and digital networking platform (from Brain Forge) built for seamless user interaction.', tags: ['React', 'Node.js'], status: 'live', link: 'https://linkaura.in', icon: '✨' },
+];
+
+export default function Projects() {
+  const { scrollYProgress } = useScroll();
+  const yBg = useTransform(scrollYProgress, [0, 1], [0, -100]);
+
   useEffect(() => {
-    // Scroll to top button visibility
-    const toggleVisibility = () => {
-      if (window.scrollY > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    window.addEventListener('scroll', toggleVisibility);
-
-    // Fade in animations
-    gsap.utils.toArray('.fade-up').forEach((section) => {
-      gsap.fromTo(
-        section,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 80%',
-            toggleActions: 'play none none none',
-          },
-        }
-      );
-    });
-
-    // Stagger animations for project cards
-    gsap.utils.toArray('.project-card').forEach((card, i) => {
-      gsap.fromTo(
-        card,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          delay: i * 0.1,
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-          },
-        }
-      );
-    });
-
-    return () => {
-      window.removeEventListener('scroll', toggleVisibility);
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
+    window.scrollTo(0, 0);
   }, []);
 
-  const getStatusBadge = (status) => {
-    switch (status) {
-      case 'live':
-        return <span className="text-xs px-2 py-1 rounded-full bg-green-500/10 text-green-400 border border-green-500/20">Live</span>;
-      case 'in-progress':
-        return <span className="text-xs px-2 py-1 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">In Progress</span>;
-      case 'planned':
-        return <span className="text-xs px-2 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">Planned</span>;
-      default:
-        return null;
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-white relative overflow-hidden">
-      {/* Background grid with parallax */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              'linear-gradient(to right, #1F1F1F 1px, transparent 1px), linear-gradient(to bottom, #1F1F1F 1px, transparent 1px)',
-            backgroundSize: '128px 128px',
-            opacity: 0.2,
-          }}
-        ></div>
-        {Array.from({ length: 20 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full bg-[#C2A68C] opacity-20"
-            style={{
-              width: Math.random() * 6 + 2 + 'px',
-              height: Math.random() * 6 + 2 + 'px',
-              left: Math.random() * 100 + '%',
-              top: Math.random() * 100 + '%',
-              animation: `float ${Math.random() * 10 + 10}s linear infinite`,
-              animationDelay: Math.random() * 5 + 's',
-            }}
-          />
-        ))}
-      </div>
-
+    <div className="min-h-screen bg-[#fafafa] font-sans selection:bg-black selection:text-white pb-0">
       <Helmet>
-        <title>Previous Builds - NEGO</title>
-        <meta name="description" content="Explore our portfolio of successful projects." />
-        <link rel="icon" href="/favicon.ico" />
+        <title>Previous Builds — NEGO</title>
+        <meta name="description" content="Explore NEGO's portfolio of web applications, mobile apps, and SaaS platforms." />
       </Helmet>
 
-      {/* Navigation Bar */}
       <Navbar />
 
-      <main className="container mx-auto px-6 pt-24 pb-16 relative z-10">
-        {/* Hero Section */}
-        <section className="text-center mb-20 fade-up">
-          <motion.h1
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            Previous <span className="bg-gradient-to-r from-[#C2A68C] to-[#E6D8C3] bg-clip-text text-transparent">Builds</span>
-          </motion.h1>
-          <motion.p
-            className="text-lg text-gray-400 max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            A closer look at the digital solutions we’ve delivered — designed for impact and built to perform.
-          </motion.p>
-        </section>
+      <main className="relative pt-36 pb-24 overflow-hidden">
+        <motion.div style={{ y: yBg }} className="absolute inset-0 z-0">
+          <GridBg opacity={0.6} size={48} />
+        </motion.div>
+        
+        <div className="absolute inset-0 pointer-events-none z-0"
+          style={{ background: 'radial-gradient(ellipse 80% 90% at 50% -10%, #fff 0%, transparent 80%)' }} />
 
-        {/* Projects Grid */}
-        <section className="mb-24">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project) => (
-              <a
-                key={project.id}
-                href={project.links.live}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
+        <div className="relative z-10 max-w-7xl mx-auto px-6">
+          
+          {/* Hero Header */}
+          <div className="mb-24 grid md:grid-cols-12 gap-10 items-end">
+            <motion.div 
+              className="md:col-span-8 flex flex-col items-start text-left"
+              initial="hidden" animate="show" variants={fadeUp(0)}
+            >
+              <SectionLabel>Our Portfolio</SectionLabel>
+              <h1 className="font-black text-black leading-[1.02] tracking-tight mb-7"
+                style={{ fontSize: 'clamp(3.5rem, 6.5vw, 5.5rem)', letterSpacing: '-0.045em' }}>
+                Previous <br className="hidden md:block"/>
+                <span className="text-black/30">Builds.</span>
+              </h1>
+              <p className="text-[16px] md:text-[18px] text-black/50 max-w-xl leading-[1.75]">
+                A closer look at the digital solutions we've delivered — designed for impact and built to perform.
+              </p>
+            </motion.div>
+            
+            <motion.div 
+              className="hidden md:flex md:col-span-4 justify-end items-center pb-6"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+            >
+              <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full flex items-center justify-center bg-white border border-black/8 shadow-sm">
+                <div className="absolute inset-2 border border-dashed border-black/20 rounded-full animate-[spin_24s_linear_infinite_reverse]" />
+                <div className="text-center relative z-10">
+                  <div className="text-[32px] font-black text-black leading-none mb-1">{PROJECTS_LIST.length}</div>
+                  <div className="text-[8px] uppercase tracking-widest font-bold text-black/40">Projects</div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Projects Grid */}
+          <div className="grid md:grid-cols-2 gap-6 lg:gap-8 mb-32">
+            {PROJECTS_LIST.map((p, i) => (
+              <a key={p.id} href={p.link} target="_blank" rel="noopener noreferrer" className="block outline-none">
                 <motion.div
-                  className="project-card group relative rounded-2xl border border-[#2a2a2a] bg-[#111111]/60 backdrop-blur-md p-6 overflow-hidden h-full flex flex-col"
-                  whileHover={{ y: -5, transition: { duration: 0.3 } }}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.7, delay: (i % 2) * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                  className="group relative rounded-[2rem] p-8 md:p-10 bg-white border border-black/8 overflow-hidden h-full flex flex-col transition-all duration-500"
+                  style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.03)' }}
+                  whileHover={{ y: -6, boxShadow: '0 24px 72px rgba(0,0,0,0.08)', borderColor: 'rgba(0,0,0,0.15)' }}
                 >
-                  <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#C2A68C]/10 rounded-full blur-3xl"></div>
-                  <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-[#E6D8C3]/10 rounded-full blur-3xl"></div>
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                    style={{ background: 'radial-gradient(circle at top right, rgba(0,0,0,0.02) 0%, transparent 60%)' }} />
 
-                  <div className="relative z-10 flex-1 flex flex-col">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex items-center gap-3">
-                        {project.image ? (
-                          <img
-                            src={project.image}
-                            alt={project.title}
-                            className="w-10 h-10 rounded-full object-cover border border-[#333]"
-                          />
-                        ) : (
-                          <div className="w-10 h-10 rounded-full bg-[#1E1E1E] border border-[#333] flex items-center justify-center">
-                            <span className="text-sm font-medium text-[#C2A68C]">
-                              {project.title
-                                .split(' ')
-                                .map((word) => word[0])
-                                .join('')
-                                .substring(0, 2)
-                                .toUpperCase()}
-                            </span>
-                          </div>
-                        )}
-                        <div>
-                          <h3 className="text-lg font-semibold text-white">{project.title}</h3>
-                          {getStatusBadge(project.status)}
-                        </div>
-                      </div>
-                      {project.featured && (
-                        <span className="inline-flex items-center text-xs px-2 py-1 rounded-full bg-[#C2A68C]/10 text-[#C2A68C] border border-[#C2A68C]/20">
-                          <FaStar className="mr-1" size={10} /> Featured
+                  {/* Top Row: Icon & Visit Arrow */}
+                  <div className="flex items-start justify-between mb-10">
+                    <div className="w-16 h-16 rounded-2xl bg-black/4 flex items-center justify-center text-3xl group-hover:bg-black/8 transition-colors duration-500 grayscale opacity-80 group-hover:opacity-100">
+                      {p.icon}
+                    </div>
+                    
+                    <div className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center text-black/40 group-hover:bg-black group-hover:text-white transition-all duration-500 transform group-hover:-translate-y-1 group-hover:translate-x-1">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="5" y1="19" x2="19" y2="5"></line>
+                        <polyline points="10 5 19 5 19 14"></polyline>
+                      </svg>
+                    </div>
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="flex-1 flex flex-col">
+                    <div className="flex items-center gap-3 mb-4">
+                      <h3 className="font-bold text-black text-[24px] leading-none shrink-0 border-b border-transparent group-hover:border-black/20 transition-colors">
+                        {p.title}
+                      </h3>
+                      {p.status === 'live' && (
+                        <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-green-500/10 text-green-700 text-[9px] font-bold uppercase tracking-wider">
+                          <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                          Live
                         </span>
                       )}
                     </div>
-
-                    <p className="text-gray-300 text-sm mb-4 flex-1">{project.description}</p>
-
-                    <div className="mt-4 flex flex-wrap gap-2 mb-4">
-                      {project.tags.map((tag, index) => (
-                        <span
-                          key={index}
-                          className="text-[10px] px-2 py-0.5 rounded-full bg-[#141414] border border-[#2a2a2a] text-gray-300"
-                        >
-                          {tag}
+                    
+                    <p className="leading-[1.7] text-black/50 text-[15px] mb-8 max-w-md">
+                      {p.desc}
+                    </p>
+                    
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2 mt-auto">
+                      {p.tags.map(t => (
+                        <span key={t} className="text-[10.5px] px-3.5 py-1.5 rounded-full border border-black/8 text-black/50 bg-black/[0.02] font-semibold group-hover:border-black/20 group-hover:text-black/70 transition-colors tracking-wide">
+                          {t}
                         </span>
                       ))}
-                    </div>
-
-                    <div className="mt-auto pt-4 border-t border-[#252525] flex items-center justify-between">
-                      {project.status === 'live' && project.links.live ? (
-                        <div
-                          className="group flex items-center text-[#C2A68C] hover:text-[#E6D8C3] transition-colors"
-                          title="Visit Live Site"
-                        >
-                          <div className="flex items-center">
-                            <div className="relative">
-                              <div className="w-2 h-2 rounded-full bg-green-500 mr-2"></div>
-                              <div className="absolute top-0 left-0 w-2 h-2 rounded-full bg-green-500 animate-ping"></div>
-                            </div>
-                            <span className="text-xs font-medium">Live</span>
-                          </div>
-                        </div>
-                      ) : (
-                        <span className="text-xs text-gray-500">
-                          {project.status === 'in-progress' ? 'In Development' : 'Coming Soon'}
-                        </span>
-                      )}
-                      <div className="flex items-center space-x-1">
-                        <FaCode className="text-gray-500" size={12} />
-                        <FaServer className="text-gray-500" size={12} />
-                        {project.tags.includes('React Native') && <FaMobile className="text-gray-500" size={12} />}
-                        {project.tags.includes('OpenAI') && <FaRobot className="text-gray-500" size={12} />}
-                        {project.tags.includes('MongoDB') || project.tags.includes('PostgreSQL') ? (
-                          <FaDatabase className="text-gray-500" size={12} />
-                        ) : null}
-                      </div>
                     </div>
                   </div>
                 </motion.div>
               </a>
             ))}
           </div>
-        </section>
 
-        {/* CTA Section */}
-        <motion.section 
-          className="bg-gradient-to-r from-[#1A1A1A] to-[#0F0F0F] rounded-2xl border border-[#252525] p-8 md:p-12 text-center mb-20 fade-up"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Have a project in mind?</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto mb-8">
-            Let's discuss how we can help bring your ideas to life with our expertise and innovative solutions.
-          </p>
-          <motion.a
-            href="/contact"
-            className="inline-flex items-center px-8 py-3.5 bg-gradient-to-r from-[#C2A68C] to-[#E6D8C3] text-[#0A0A0A] font-medium rounded-full hover:shadow-lg hover:shadow-[#C2A68C]/30 transition-all duration-300"
-            whileHover={{ y: -3, scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            Get in Touch
-          </motion.a>
-        </motion.section>
+          {/* Unified Bold CTA */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96, y: 20 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="relative rounded-[3rem] p-12 md:p-20 bg-black text-white flex flex-col items-center text-center overflow-hidden"
+            style={{ boxShadow: '0 32px 80px rgba(0,0,0,0.18)' }}>
+            
+            <div className="absolute inset-0 pointer-events-none"
+              style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '48px 48px' }} />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-white/5 blur-[120px] pointer-events-none rounded-[100%]" />
+
+            <h2 className="relative font-black text-white leading-[1.05] mb-6 text-[clamp(2.5rem,5vw,4rem)] tracking-tight max-w-2xl">
+              Impressed by what you see? Let's build together.
+            </h2>
+
+            <motion.a href="https://wa.me/919413973399" target="_blank" rel="noopener noreferrer"
+              className="relative inline-flex items-center gap-3 px-10 py-5 mt-4 rounded-full font-bold text-black bg-white text-[15px]"
+              whileHover={{ scale: 1.05, backgroundColor: '#f5f5f5' }} whileTap={{ scale: 0.98 }}
+              style={{ boxShadow: '0 12px 40px rgba(255,255,255,0.15)' }}>
+              Start your project
+              <svg className="w-5 h-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </motion.a>
+          </motion.div>
+
+        </div>
       </main>
 
       <Footer />
-
-      {/* Scroll to Top Button */}
-      {isVisible && (
-        <motion.button
-          className="fixed bottom-8 right-8 bg-gradient-to-r from-[#C2A68C] to-[#E6D8C3] text-[#0A0A0A] p-3 rounded-full shadow-lg z-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#C2A68C]"
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 20 }}
-          whileHover={{ scale: 1.1, y: -5 }}
-          whileTap={{ scale: 0.95 }}
-          aria-label="Back to top"
-        >
-          <FaExternalLinkAlt className="w-5 h-5 transform rotate-90" />
-        </motion.button>
-      )}
     </div>
   );
-};
-
-export default Projects;
+}

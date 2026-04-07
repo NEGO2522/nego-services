@@ -442,23 +442,7 @@ const Landing = () => {
                 ))}
               </motion.div>
 
-              {/* Social proof avatars */}
-              <motion.div variants={fadeUp(0.45)} initial="hidden" animate="show"
-                className="flex items-center gap-3 mt-6">
-                <div className="flex -space-x-2">
-                  {['L', 'C', 'S'].map((l, i) => (
-                    <div key={i} className="w-7 h-7 rounded-full bg-black border-2 border-white flex items-center justify-center text-[9px] font-black text-white">
-                      {l}
-                    </div>
-                  ))}
-                </div>
-                <div>
-                  <div className="flex gap-0.5">
-                    {[...Array(5)].map((_, i) => <FaStar key={i} className="text-black text-[9px]" />)}
-                  </div>
-                  <div className="text-[11px] text-black/38 mt-0.5">Trusted by 10+ businesses</div>
-                </div>
-              </motion.div>
+
             </div>
 
             {/* ── RIGHT — Hero Visual ── */}
@@ -867,30 +851,56 @@ const Landing = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 28 }}
+            initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="relative rounded-3xl border border-black/8 p-10 md:p-14 bg-white overflow-hidden"
-            style={{ boxShadow: '0 8px 56px rgba(0,0,0,0.08)' }}>
-            {/* Corner grid accent */}
-            <div className="absolute top-0 right-0 w-40 h-40 pointer-events-none"
+            className="relative rounded-3xl border border-black/8 p-10 md:p-14 bg-white text-black overflow-hidden text-left sm:text-center group"
+            style={{ boxShadow: '0 8px 56px rgba(0,0,0,0.06)' }}>
+            
+            {/* Subtle glow / animated background element */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+              style={{ background: 'radial-gradient(ellipse 60% 60% at 50% 100%, rgba(0,0,0,0.03), transparent)' }} />
+              
+            {/* Corner dot grid (inverted) */}
+            <div className="absolute top-0 right-0 w-40 h-40 pointer-events-none opacity-40"
               style={{
-                backgroundImage: 'linear-gradient(#e5e5e5 1px, transparent 1px), linear-gradient(90deg, #e5e5e5 1px, transparent 1px)',
+                backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.3) 1px, transparent 1px)',
                 backgroundSize: '16px 16px',
                 maskImage: 'linear-gradient(to bottom-left, black 20%, transparent 60%)',
                 WebkitMaskImage: 'linear-gradient(to bottom-left, black 20%, transparent 60%)',
-                opacity: 0.7,
               }} />
 
-            <div className="text-[64px] leading-none text-black/7 mb-3 font-serif">"</div>
-            <p className="text-[17px] md:text-[19px] font-light leading-[1.75] text-black/62 mb-7 max-w-xl mx-auto">
+            {/* Glowing quote icon */}
+            <div className="mb-8 flex sm:justify-center">
+              <div className="w-12 h-12 rounded-full bg-black/5 border border-black/10 flex items-center justify-center relative">
+                <span className="text-[28px] font-serif leading-none mt-2 text-black/40">"</span>
+              </div>
+            </div>
+
+            <p className="text-[17px] md:text-[20px] font-light leading-[1.8] text-black/70 mb-12 max-w-2xl mx-auto">
               NEGO didn't just build us a website — they built us a growth engine. The team was incredibly responsive, demos every week, and the final product launched ahead of schedule.
             </p>
-            <div className="flex items-center justify-center gap-1 mb-3">
-              {[...Array(5)].map((_, i) => <FaStar key={i} className="text-black text-xs" />)}
+            
+            {/* Attribution row */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-t border-black/8 pt-6 mt-6 max-w-2xl mx-auto">
+              <div className="flex items-center gap-3 mb-4 sm:mb-0">
+                <div className="w-10 h-10 rounded-full bg-black/5 flex items-center justify-center font-bold text-black/50 text-xs text-center border border-black/5">
+                  LS
+                </div>
+                <div className="text-left">
+                  <div className="text-[13px] font-bold text-black/80">Founder, Lathi Shop</div>
+                  <div className="text-[11px] text-black/40">Jaipur, India</div>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-1.5 bg-black/4 px-3 py-1.5 rounded-full border border-black/5">
+                <div className="flex gap-0.5">
+                  {[...Array(5)].map((_, i) => <FaStar key={i} className="text-black/60 text-[10px]" />)}
+                </div>
+                <span className="text-[10px] font-bold ml-1 text-black/70">5.0</span>
+              </div>
             </div>
-            <div className="text-[12px] text-black/30">— Founder, Lathi Shop  ·  Jaipur, India</div>
           </motion.div>
         </div>
       </section>
