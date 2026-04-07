@@ -57,7 +57,7 @@ export default function Footer() {
         <div className="relative z-10 max-w-6xl mx-auto px-8 py-14">
 
           {/* Top section */}
-          <div className="flex flex-col lg:flex-row justify-between gap-12 mb-12">
+          <div className="flex flex-col lg:flex-row justify-between gap-10 mb-10">
 
             {/* Brand */}
             <motion.div
@@ -100,7 +100,7 @@ export default function Footer() {
             </motion.div>
 
             {/* Links columns */}
-            <div className="flex gap-16 flex-wrap">
+            <div className="flex gap-8 sm:gap-12 lg:gap-16 flex-wrap">
               <motion.div
                 variants={fadeUp(0.08)}
                 initial="hidden"

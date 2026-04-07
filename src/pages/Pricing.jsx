@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-/* ── Google Font injection ── */
 const injectFont = () => {
   if (document.getElementById('pricing-fonts')) return;
   const l = document.createElement('link');
@@ -13,61 +12,27 @@ const injectFont = () => {
   document.head.appendChild(l);
 };
 
-/* ── Data ── */
 const PLANS = [
   {
-    index: '01',
-    name: 'Starter',
-    subtitle: 'Landing pages & brochure sites',
-    price: '₹15,000',
-    timeline: '7–10 days',
+    index: '01', name: 'Starter', subtitle: 'Landing pages & brochure sites',
+    price: '₹15,000', timeline: '7–10 days',
     ideal: 'Freelancers, local businesses, early-stage founders who need a polished web presence fast.',
-    deliverables: [
-      'Up to 5 custom pages',
-      'Mobile-first responsive design',
-      'Contact form + WhatsApp integration',
-      'On-page SEO setup',
-      'Google Analytics connected',
-      'Deployed & domain configured',
-    ],
+    deliverables: ['Up to 5 custom pages', 'Mobile-first responsive design', 'Contact form + WhatsApp integration', 'On-page SEO setup', 'Google Analytics connected', 'Deployed & domain configured'],
     notIncluded: ['Backend / database', 'Admin panel', 'Payment gateway'],
-  },
-  {
-    index: '02',
-    name: 'Growth',
-    subtitle: 'Web apps, stores & full-stack products',
-    price: '₹40,000',
-    timeline: '3–4 weeks',
-    ideal: 'Startups and businesses that need a working product — not just a website.',
-    deliverables: [
-      'Up to 15 pages / screens',
-      'Custom backend + database',
-      'Payment gateway (Razorpay / Stripe)',
-      'Admin panel & dashboard',
-      'User authentication',
-      'Advanced SEO + sitemap',
-      '1 month post-launch support',
-    ],
-    notIncluded: ['Mobile apps (iOS / Android)'],
     popular: true,
   },
   {
-    index: '03',
-    name: 'Scale',
-    subtitle: 'SaaS platforms, mobile apps & complex systems',
-    price: 'Custom',
-    timeline: '6–12 weeks',
+    index: '02', name: 'Growth', subtitle: 'Web apps, stores & full-stack products',
+    price: '₹40,000', timeline: '3–4 weeks',
+    ideal: 'Startups and businesses that need a working product — not just a website.',
+    deliverables: ['Up to 15 pages / screens', 'Custom backend + database', 'Payment gateway (Razorpay / Stripe)', 'Admin panel & dashboard', 'User authentication', 'Advanced SEO + sitemap', '1 month post-launch support'],
+    notIncluded: ['Mobile apps (iOS / Android)'],
+  },
+  {
+    index: '03', name: 'Scale', subtitle: 'SaaS platforms, mobile apps & complex systems',
+    price: 'Custom', timeline: '6–12 weeks',
     ideal: 'Founders building serious products that need architecture, scalability, and a team that acts like a partner.',
-    deliverables: [
-      'Unlimited screens & modules',
-      'Mobile app (Android + iOS)',
-      'Subscription billing & auth',
-      'Real-time features & APIs',
-      'CI/CD pipeline setup',
-      'Weekly sprint demos',
-      '3 months post-launch support',
-      'Dedicated project manager',
-    ],
+    deliverables: ['Unlimited screens & modules', 'Mobile app (Android + iOS)', 'Subscription billing & auth', 'Real-time features & APIs', 'CI/CD pipeline setup', 'Weekly sprint demos', '3 months post-launch support', 'Dedicated project manager'],
     notIncluded: [],
   },
 ];
@@ -79,203 +44,111 @@ const FAQS = [
   { q: 'International clients?', a: 'Absolutely. We work globally and accept international transfers and Stripe.' },
 ];
 
-/* ── Accordion row ── */
-const PlanRow = ({ plan, isOpen, onToggle }) => {
-  const contentRef = useRef(null);
+const PlanRow = ({ plan, isOpen, onToggle }) => (
+  <div className="border-b border-black/10 last:border-b-0" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+    {/* Header */}
+    <button onClick={onToggle} className="w-full text-left"
+      style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '1.5rem 0' }}>
+      <div className="flex items-center gap-3 sm:gap-5">
+        {/* Index — hidden on very small screens */}
+        <span className="hidden sm:block flex-shrink-0 w-9 text-[12px] text-black/22 font-semibold"
+          style={{ fontFamily: "'DM Serif Display', serif" }}>{plan.index}</span>
 
-  return (
-    <div
-      className="border-b border-black/10 last:border-b-0"
-      style={{ fontFamily: "'DM Sans', sans-serif" }}
-    >
-      {/* Header — always visible */}
-      <button
-        onClick={onToggle}
-        className="w-full text-left group"
-        style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
-      >
-        <div className="grid items-center gap-4 py-7 px-0"
-          style={{ gridTemplateColumns: '3rem 1fr auto auto' }}>
-
-          {/* Index */}
-          <span
-            style={{
-              fontFamily: "'DM Serif Display', serif",
-              fontSize: '13px',
-              color: 'rgba(0,0,0,0.22)',
-              letterSpacing: '0.05em',
-            }}
-          >
-            {plan.index}
-          </span>
-
-          {/* Name + subtitle */}
-          <div>
-            <div className="flex items-center gap-3 flex-wrap">
-              <span
-                style={{
-                  fontFamily: "'DM Serif Display', serif",
-                  fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)',
-                  letterSpacing: '-0.02em',
-                  color: '#000',
-                  lineHeight: 1,
-                }}
-              >
-                {plan.name}
+        {/* Name block */}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+            <span className="font-black text-black leading-none"
+              style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(1.3rem, 5vw, 2rem)', letterSpacing: '-0.02em' }}>
+              {plan.name}
+            </span>
+            {plan.popular && (
+              <span className="px-2.5 py-0.5 rounded-full text-white text-[9px] font-bold tracking-widest uppercase bg-black flex-shrink-0">
+                Popular
               </span>
-              {plan.popular && (
-                <span
-                  className="px-3 py-1 rounded-full text-white"
-                  style={{
-                    fontSize: '9px',
-                    fontWeight: 600,
-                    letterSpacing: '0.18em',
-                    textTransform: 'uppercase',
-                    background: '#000',
-                  }}
-                >
-                  Most popular
-                </span>
-              )}
-            </div>
-            <p style={{ fontSize: '13px', color: 'rgba(0,0,0,0.38)', marginTop: '3px', fontWeight: 400 }}>
-              {plan.subtitle}
-            </p>
-          </div>
-
-          {/* Price */}
-          <span
-            style={{
-              fontFamily: "'DM Serif Display', serif",
-              fontSize: 'clamp(1.1rem, 2.5vw, 1.6rem)',
-              color: '#000',
-              letterSpacing: '-0.02em',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            {plan.price}
-          </span>
-
-          {/* Toggle arrow */}
-          <motion.div
-            animate={{ rotate: isOpen ? 45 : 0 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            style={{
-              width: 36,
-              height: 36,
-              borderRadius: '50%',
-              border: '1px solid rgba(0,0,0,0.12)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0,
-            }}
-          >
-            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 5v14M5 12h14" />
-            </svg>
-          </motion.div>
-        </div>
-      </button>
-
-      {/* Expandable detail */}
-      <motion.div
-        initial={false}
-        animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
-        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-        style={{ overflow: 'hidden' }}
-      >
-        <div
-          ref={contentRef}
-          className="grid gap-8 pb-10"
-          style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', paddingLeft: '3rem' }}
-        >
-          {/* Ideal for */}
-          <div>
-            <p style={{ fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', fontWeight: 600, marginBottom: '10px' }}>
-              Ideal for
-            </p>
-            <p style={{ fontSize: '13px', lineHeight: 1.75, color: 'rgba(0,0,0,0.55)' }}>{plan.ideal}</p>
-            <div style={{ marginTop: '20px' }}>
-              <p style={{ fontSize: '12px', color: 'rgba(0,0,0,0.35)', marginBottom: '6px' }}>
-                ⏱ Delivery: <strong style={{ color: '#000' }}>{plan.timeline}</strong>
-              </p>
-            </div>
-          </div>
-
-          {/* What's included */}
-          <div>
-            <p style={{ fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', fontWeight: 600, marginBottom: '10px' }}>
-              What's included
-            </p>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              {plan.deliverables.map((d) => (
-                <li key={d} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '13px', color: 'rgba(0,0,0,0.65)' }}>
-                  <span style={{ width: 16, height: 16, borderRadius: '50%', background: '#000', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '1px' }}>
-                    <svg width="8" height="8" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth={3}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </span>
-                  {d}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Not included + CTA */}
-          <div>
-            {plan.notIncluded.length > 0 && (
-              <>
-                <p style={{ fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', fontWeight: 600, marginBottom: '10px' }}>
-                  Not in this plan
-                </p>
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '28px' }}>
-                  {plan.notIncluded.map((d) => (
-                    <li key={d} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px', color: 'rgba(0,0,0,0.3)' }}>
-                      <span style={{ width: 16, height: '1px', background: 'rgba(0,0,0,0.2)', flexShrink: 0 }} />
-                      {d}
-                    </li>
-                  ))}
-                </ul>
-              </>
             )}
-            <motion.a
-              href="https://wa.me/919413973399"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '12px 24px',
-                borderRadius: '100px',
-                background: '#000',
-                color: '#fff',
-                fontSize: '13px',
-                fontWeight: 600,
-                textDecoration: 'none',
-                letterSpacing: '0.01em',
-              }}
-            >
-              {plan.price === 'Custom' ? 'Get a quote' : `Start with ${plan.name}`}
-              <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </motion.a>
           </div>
+          <p className="text-[12px] sm:text-[13px] text-black/38 mt-0.5 truncate">{plan.subtitle}</p>
         </div>
-      </motion.div>
-    </div>
-  );
-};
 
-/* ══════════════════════════════════════
-   PAGE
-══════════════════════════════════════ */
+        {/* Price */}
+        <span className="flex-shrink-0 font-black text-black"
+          style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(1rem, 3.5vw, 1.5rem)', letterSpacing: '-0.02em' }}>
+          {plan.price}
+        </span>
+
+        {/* Toggle */}
+        <motion.div animate={{ rotate: isOpen ? 45 : 0 }} transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-black/12 flex items-center justify-center">
+          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 5v14M5 12h14" />
+          </svg>
+        </motion.div>
+      </div>
+    </button>
+
+    {/* Expandable */}
+    <motion.div initial={false}
+      animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
+      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      style={{ overflow: 'hidden' }}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-8 sm:pb-10">
+        {/* Ideal for */}
+        <div>
+          <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-black/28 mb-3">Ideal for</p>
+          <p className="text-[13px] leading-[1.75] text-black/55">{plan.ideal}</p>
+          <p className="text-[12px] text-black/35 mt-4">
+            ⏱ Delivery: <strong className="text-black">{plan.timeline}</strong>
+          </p>
+        </div>
+
+        {/* Included */}
+        <div>
+          <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-black/28 mb-3">What's included</p>
+          <ul className="flex flex-col gap-2">
+            {plan.deliverables.map(d => (
+              <li key={d} className="flex items-start gap-2.5 text-[13px] text-black/65">
+                <span className="w-4 h-4 rounded-full bg-black flex-shrink-0 mt-0.5 flex items-center justify-center">
+                  <svg width="7" height="7" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth={3}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </span>
+                {d}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Not included + CTA */}
+        <div className="flex flex-col">
+          {plan.notIncluded.length > 0 && (
+            <div className="mb-6">
+              <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-black/28 mb-3">Not in this plan</p>
+              <ul className="flex flex-col gap-2">
+                {plan.notIncluded.map(d => (
+                  <li key={d} className="flex items-center gap-2.5 text-[13px] text-black/28">
+                    <span className="w-4 h-px bg-black/20 flex-shrink-0" />
+                    {d}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          <motion.a href="https://wa.me/919413973399" target="_blank" rel="noopener noreferrer"
+            whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
+            className="inline-flex items-center justify-center sm:justify-start gap-2 px-5 py-3 rounded-full bg-black text-white text-[13px] font-semibold mt-auto w-full sm:w-auto">
+            {plan.price === 'Custom' ? 'Get a quote' : `Start with ${plan.name}`}
+            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </motion.a>
+        </div>
+      </div>
+    </motion.div>
+  </div>
+);
+
 const Pricing = () => {
-  const [openIndex, setOpenIndex] = useState(1); // Growth open by default
+  const [openIndex, setOpenIndex] = useState(0);
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end start'] });
   const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
@@ -287,93 +160,41 @@ const Pricing = () => {
   }, []);
 
   return (
-    <div style={{ minHeight: '100vh', background: '#fff', color: '#000', fontFamily: "'DM Sans', sans-serif" }}>
+    <div className="min-h-screen bg-white text-black overflow-x-hidden" style={{ fontFamily: "'DM Sans', sans-serif" }}>
       <Navbar />
 
       {/* ── Hero ── */}
-      <section
-        ref={containerRef}
-        style={{
-          position: 'relative',
-          paddingTop: '10rem',
-          paddingBottom: '6rem',
-          overflow: 'hidden',
-          borderBottom: '1px solid rgba(0,0,0,0.08)',
-        }}
-      >
-        {/* Animated ruled lines background */}
-        <motion.div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            y: bgY,
+      <section ref={containerRef} className="relative pt-28 sm:pt-36 pb-12 sm:pb-16 px-5 sm:px-8 overflow-hidden border-b border-black/8">
+        <motion.div style={{ y: bgY }} className="absolute inset-0 pointer-events-none"
+          initial={false}>
+          <div style={{
+            position: 'absolute', inset: 0,
             backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 47px, rgba(0,0,0,0.04) 47px, rgba(0,0,0,0.04) 48px)',
-            pointerEvents: 'none',
-          }}
-        />
+          }} />
+        </motion.div>
 
-        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 2rem', position: 'relative', zIndex: 1 }}>
-          {/* Eyebrow */}
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            style={{
-              fontSize: '10px',
-              fontWeight: 600,
-              letterSpacing: '0.28em',
-              textTransform: 'uppercase',
-              color: 'rgba(0,0,0,0.3)',
-              marginBottom: '1.5rem',
-            }}
-          >
+        <div className="relative z-10 max-w-5xl mx-auto">
+          <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
+            className="text-[10px] font-semibold tracking-[0.28em] uppercase text-black/30 mb-4">
             Rate Card — 2025
           </motion.p>
+          <motion.h1 initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.08 }}
+            className="font-black text-black leading-[1.02] mb-4"
+            style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(2.4rem, 8vw, 5rem)', letterSpacing: '-0.035em' }}>
+            What does<br />
+            <em className="italic" style={{ color: 'rgba(0,0,0,0.25)' }}>good work</em> cost?
+          </motion.h1>
+          <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.18 }}
+            className="text-[14px] sm:text-[15px] text-black/45 max-w-md leading-[1.78] mb-8">
+            Three clear tiers. No retainers. No hidden line items. Tap any plan to see exactly what you get.
+          </motion.p>
 
-          {/* Big headline */}
-          <div style={{ maxWidth: '720px' }}>
-            <motion.h1
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.08 }}
-              style={{
-                fontFamily: "'DM Serif Display', serif",
-                fontSize: 'clamp(3rem, 7vw, 5.5rem)',
-                letterSpacing: '-0.035em',
-                lineHeight: 1.02,
-                color: '#000',
-                marginBottom: '1.5rem',
-              }}
-            >
-              What does<br />
-              <em style={{ fontStyle: 'italic', color: 'rgba(0,0,0,0.3)' }}>good work</em> cost?
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.18 }}
-              style={{ fontSize: '15px', lineHeight: 1.75, color: 'rgba(0,0,0,0.45)', maxWidth: '460px' }}
-            >
-              Three clear tiers. No retainers. No hidden line items. Click any plan to see exactly what you get.
-            </motion.p>
-          </div>
-
-          {/* Trust strip */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.35 }}
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '2rem',
-              marginTop: '2.5rem',
-            }}
-          >
-            {['Fixed-price quotes', '50% to start', '100% on-time record', 'Source code yours'].map((t) => (
-              <span key={t} style={{ fontSize: '12px', color: 'rgba(0,0,0,0.35)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <span style={{ width: 5, height: 5, borderRadius: '50%', background: 'rgba(0,0,0,0.25)', display: 'inline-block' }} />
+          {/* Trust pills — wrap nicely on mobile */}
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }}
+            className="flex flex-wrap gap-x-5 gap-y-2">
+            {['Fixed-price quotes', '50% to start', '100% on-time', 'Source code yours'].map(t => (
+              <span key={t} className="flex items-center gap-1.5 text-[11px] sm:text-[12px] text-black/35">
+                <span className="w-1.5 h-1.5 rounded-full bg-black/25 flex-shrink-0" />
                 {t}
               </span>
             ))}
@@ -381,221 +202,106 @@ const Pricing = () => {
         </div>
       </section>
 
-      {/* ── Accordion plans ── */}
-      <section style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 2rem' }}>
-        {/* Column labels */}
-        <div
-          className="hidden sm:grid"
-          style={{
-            gridTemplateColumns: '3rem 1fr auto auto',
-            gap: '1rem',
-            padding: '1.25rem 0',
-            borderBottom: '1px solid rgba(0,0,0,0.08)',
-          }}
-        >
-          {['#', 'Plan', 'Starting at', ''].map((label, i) => (
-            <span
-              key={i}
-              style={{
-                fontSize: '9px',
-                fontWeight: 600,
-                letterSpacing: '0.22em',
-                textTransform: 'uppercase',
-                color: 'rgba(0,0,0,0.25)',
-              }}
-            >
-              {label}
-            </span>
-          ))}
-        </div>
+      {/* ── Accordion ── */}
+      <section className="px-5 sm:px-8">
+        <div className="max-w-5xl mx-auto">
+          {/* Column header — only desktop */}
+          <div className="hidden sm:flex items-center gap-5 py-4 border-b border-black/8">
+            <span className="w-9 text-[9px] font-semibold tracking-[0.22em] uppercase text-black/22">#</span>
+            <span className="flex-1 text-[9px] font-semibold tracking-[0.22em] uppercase text-black/22">Plan</span>
+            <span className="text-[9px] font-semibold tracking-[0.22em] uppercase text-black/22 mr-12">Starting at</span>
+          </div>
 
-        {/* Plan rows */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          {PLANS.map((plan, i) => (
-            <PlanRow
-              key={plan.index}
-              plan={plan}
-              isOpen={openIndex === i}
-              onToggle={() => setOpenIndex(openIndex === i ? null : i)}
-            />
-          ))}
-        </motion.div>
+          <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
+            {PLANS.map((plan, i) => (
+              <PlanRow key={plan.index} plan={plan} isOpen={openIndex === i}
+                onToggle={() => setOpenIndex(openIndex === i ? null : i)} />
+            ))}
+          </motion.div>
+        </div>
       </section>
 
       {/* ── Always included ── */}
-      <section
-        style={{
-          marginTop: '5rem',
-          padding: '4rem 2rem',
-          background: '#f9f9f7',
-          borderTop: '1px solid rgba(0,0,0,0.07)',
-          borderBottom: '1px solid rgba(0,0,0,0.07)',
-        }}
-      >
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', gap: '3rem', justifyContent: 'space-between' }}>
-            <div style={{ maxWidth: '320px' }}>
-              <p style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: '0.75rem' }}>
-                In every project
-              </p>
-              <h2
-                style={{
-                  fontFamily: "'DM Serif Display', serif",
-                  fontSize: 'clamp(1.6rem, 3vw, 2.2rem)',
-                  letterSpacing: '-0.03em',
-                  lineHeight: 1.15,
-                  color: '#000',
-                }}
-              >
-                The baseline,<br />non-negotiable.
-              </h2>
-            </div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem', flex: 1, justifyContent: 'flex-end', minWidth: '280px' }}>
-              {[
-                { n: '01', title: 'Weekly demos', desc: 'You see real progress, every week. No black boxes.' },
-                { n: '02', title: 'Direct access', desc: 'Chat with the person writing your code, not a PM layer.' },
-                { n: '03', title: 'Source code handover', desc: 'Everything we build is yours. No lock-in.' },
-                { n: '04', title: 'Deployed & live', desc: 'We set up hosting, domain, SSL — all done for you.' },
-              ].map((item) => (
-                <motion.div
-                  key={item.n}
-                  whileHover={{ y: -3 }}
-                  style={{
-                    background: '#fff',
-                    border: '1px solid rgba(0,0,0,0.08)',
-                    borderRadius: '16px',
-                    padding: '1.25rem 1.5rem',
-                    width: '200px',
-                    flexShrink: 0,
-                  }}
-                >
-                  <p style={{ fontSize: '10px', color: 'rgba(0,0,0,0.2)', fontWeight: 600, letterSpacing: '0.15em', marginBottom: '0.5rem' }}>{item.n}</p>
-                  <p style={{ fontSize: '14px', fontWeight: 600, color: '#000', marginBottom: '0.4rem' }}>{item.title}</p>
-                  <p style={{ fontSize: '12px', lineHeight: 1.6, color: 'rgba(0,0,0,0.42)' }}>{item.desc}</p>
-                </motion.div>
-              ))}
-            </div>
+      <section className="px-5 sm:px-8 py-14 sm:py-20 mt-8 border-t border-b border-black/7" style={{ background: '#f9f9f7' }}>
+        <div className="max-w-5xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
+            <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-black/28 mb-3">In every project</p>
+            <h2 className="font-black text-black leading-[1.1]"
+              style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', letterSpacing: '-0.03em' }}>
+              The baseline,<br className="sm:hidden" /> non-negotiable.
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+            {[
+              { n: '01', title: 'Weekly demos', desc: 'Real progress, every week.' },
+              { n: '02', title: 'Direct access', desc: 'Talk to who builds it.' },
+              { n: '03', title: 'Code handover', desc: 'Everything is yours.' },
+              { n: '04', title: 'Deployed live', desc: 'Hosting + SSL, done.' },
+            ].map((item, i) => (
+              <motion.div key={item.n}
+                initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.08 }}
+                whileHover={{ y: -3 }}
+                className="bg-white border border-black/8 rounded-2xl p-4 sm:p-5 transition-all"
+                style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}>
+                <p className="text-[9px] font-bold tracking-[0.15em] text-black/20 mb-2">{item.n}</p>
+                <p className="font-bold text-black text-[13px] sm:text-[14px] mb-1">{item.title}</p>
+                <p className="text-[11px] sm:text-[12px] text-black/42 leading-[1.6]">{item.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ── FAQ ── */}
-      <section style={{ maxWidth: '720px', margin: '0 auto', padding: '5rem 2rem' }}>
-        <p style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.28)', marginBottom: '0.75rem' }}>
-          FAQ
-        </p>
-        <h2
-          style={{
-            fontFamily: "'DM Serif Display', serif",
-            fontSize: 'clamp(1.6rem, 3vw, 2.4rem)',
-            letterSpacing: '-0.03em',
-            color: '#000',
-            marginBottom: '2.5rem',
-          }}
-        >
-          The questions we always get.
-        </h2>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          {FAQS.map((faq, i) => (
-            <motion.div
-              key={faq.q}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.07 }}
-              style={{
-                padding: '1.75rem 0',
-                borderBottom: '1px solid rgba(0,0,0,0.08)',
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gap: '2rem',
-              }}
-            >
-              <p style={{ fontSize: '14px', fontWeight: 600, color: '#000', lineHeight: 1.5 }}>{faq.q}</p>
-              <p style={{ fontSize: '14px', color: 'rgba(0,0,0,0.48)', lineHeight: 1.7 }}>{faq.a}</p>
-            </motion.div>
-          ))}
+      <section className="px-5 sm:px-8 py-14 sm:py-20">
+        <div className="max-w-3xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
+            <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-black/28 mb-3">FAQ</p>
+            <h2 className="font-black text-black"
+              style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(1.6rem, 4vw, 2.4rem)', letterSpacing: '-0.03em' }}>
+              The questions we always get.
+            </h2>
+          </motion.div>
+
+          <div className="flex flex-col">
+            {FAQS.map((faq, i) => (
+              <motion.div key={faq.q}
+                initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.07 }}
+                className="py-5 sm:py-6 border-b border-black/8 flex flex-col sm:grid sm:grid-cols-2 gap-2 sm:gap-8">
+                <p className="text-[14px] font-bold text-black">{faq.q}</p>
+                <p className="text-[13px] sm:text-[14px] text-black/48 leading-[1.7]">{faq.a}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ── Final CTA ── */}
-      <section style={{ padding: '0 2rem 6rem' }}>
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          style={{
-            maxWidth: '1100px',
-            margin: '0 auto',
-            background: '#000',
-            borderRadius: '24px',
-            padding: 'clamp(2.5rem, 6vw, 4rem)',
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '2rem',
-          }}
-        >
+      <section className="px-5 sm:px-8 pb-16 sm:pb-24">
+        <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+          className="max-w-5xl mx-auto bg-black rounded-3xl p-8 sm:p-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-7"
+          style={{ boxShadow: '0 20px 60px rgba(0,0,0,0.2)' }}>
           <div>
-            <p style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: '0.75rem' }}>
-              Not sure where to start?
-            </p>
-            <h2
-              style={{
-                fontFamily: "'DM Serif Display', serif",
-                fontSize: 'clamp(1.5rem, 3.5vw, 2.4rem)',
-                letterSpacing: '-0.03em',
-                color: '#fff',
-                lineHeight: 1.15,
-                maxWidth: '400px',
-              }}
-            >
+            <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-white/28 mb-3">Not sure where to start?</p>
+            <h2 className="font-black text-white leading-[1.12]"
+              style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(1.4rem, 4vw, 2.2rem)', letterSpacing: '-0.03em', maxWidth: 380 }}>
               Tell us what you're building. We'll figure out the rest.
             </h2>
           </div>
-          <motion.a
-            href="https://wa.me/919413973399"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.05, background: '#f0f0f0' }}
-            whileTap={{ scale: 0.97 }}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '10px',
-              padding: '1rem 2rem',
-              borderRadius: '100px',
-              background: '#fff',
-              color: '#000',
-              fontSize: '14px',
-              fontWeight: 600,
-              textDecoration: 'none',
-              flexShrink: 0,
-              letterSpacing: '0.01em',
-            }}
-          >
-            <span style={{ position: 'relative', display: 'inline-flex', width: 8, height: 8 }}>
-              <span style={{
-                position: 'absolute', inset: 0, borderRadius: '50%', background: '#22c55e', opacity: 0.6,
-                animation: 'ping 1.2s cubic-bezier(0,0,0.2,1) infinite',
-              }} />
-              <span style={{ position: 'relative', borderRadius: '50%', width: 8, height: 8, background: '#22c55e' }} />
+          <motion.a href="https://wa.me/919413973399" target="_blank" rel="noopener noreferrer"
+            whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}
+            className="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-full bg-white text-black text-[14px] font-bold flex-shrink-0 w-full sm:w-auto">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute h-full w-full rounded-full bg-green-500 opacity-75" />
+              <span className="relative rounded-full h-2 w-2 bg-green-500" />
             </span>
             Chat on WhatsApp
           </motion.a>
         </motion.div>
       </section>
-
-      <style>{`
-        @keyframes ping {
-          75%, 100% { transform: scale(2); opacity: 0; }
-        }
-      `}</style>
 
       <Footer />
     </div>
