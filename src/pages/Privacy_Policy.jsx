@@ -3,153 +3,231 @@ import { Helmet } from 'react-helmet';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
+const fadeUp = (delay = 0) => ({
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] } },
+});
+
+const pageFlip = (i = 0) => ({
+  hidden: { opacity: 0, x: 48, rotateY: -12, transformPerspective: 900 },
+  show: {
+    opacity: 1, x: 0, rotateY: 0, transformPerspective: 900,
+    transition: { duration: 0.7, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] },
+  },
+});
+
+const SECTIONS = [
+  {
+    id: 'intro',
+    title: 'Introduction',
+    content: 'This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our services.',
+  },
+  {
+    id: 'collect',
+    title: 'Information We Collect',
+    items: [
+      'Personal identification information such as name, email, and contact details.',
+      'Usage data, analytics, and cookies to improve performance and user experience.',
+      'Communication records when you contact us.',
+    ],
+  },
+  {
+    id: 'use',
+    title: 'How We Use Information',
+    items: [
+      'To provide, operate, and maintain our services.',
+      'To improve, personalize, and expand our offerings.',
+      'To communicate with you for support and updates.',
+      'To comply with legal obligations.',
+    ],
+  },
+  {
+    id: 'cookies',
+    title: 'Cookies & Tracking',
+    content: 'We use cookies and similar tracking technologies to monitor activity on our site and hold certain information. You can control cookies through your browser settings.',
+  },
+  {
+    id: 'sharing',
+    title: 'Data Sharing',
+    content: 'We do not sell your personal information. We may share information with service providers who assist in our operations, subject to confidentiality obligations.',
+  },
+  {
+    id: 'security',
+    title: 'Data Security',
+    content: 'We implement appropriate technical and organizational measures to protect your data. However, no method of transmission over the Internet is 100% secure.',
+  },
+  {
+    id: 'rights',
+    title: 'Your Rights',
+    items: [
+      'Access, update, or delete your personal information.',
+      'Opt-out of certain data processing activities.',
+      'Withdraw consent where processing is based on consent.',
+    ],
+  },
+  {
+    id: 'contact',
+    title: 'Contact Us',
+    content: 'If you have any questions about this Privacy Policy or our practices, feel free to reach out to us directly.',
+    cta: true,
+  },
+];
+
 const Privacy_Policy = () => {
+  const handleScroll = (e, id) => {
+    e.preventDefault();
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden">
-        <div 
-          className="absolute inset-0"
-          style={{
-            backgroundImage: 'linear-gradient(to right, #333 1px, transparent 1px), linear-gradient(to bottom, #333 1px, transparent 1px)',
-            backgroundSize: '128px 128px',
-            opacity: 0.2
-          }}
-        ></div>
-      </div>
-
-      <div className="absolute inset-0 bg-gradient-to-br from-[#C2A68C]/10 via-black to-[#E6D8C3]/10"></div>
-
+    <div className="min-h-screen bg-white overflow-x-hidden" style={{ fontFamily: "'Inter', sans-serif" }}>
       <Helmet>
-        <title>Privacy Policy - NEGO</title>
-        <meta name="description" content="Read NEGO's Privacy Policy" />
-        <link rel="icon" href="/favicon.ico" />
+        <title>Privacy Policy — NEGO</title>
+        <meta name="description" content="Read NEGO's Privacy Policy." />
       </Helmet>
 
       <Navbar />
 
-      <main className="min-h-[calc(100vh-4rem)] py-6 md:py-12 relative z-10">
-        <section className="max-w-7xl mx-auto px-6">
-          {/* Hero header */}
-          <motion.div 
-            className="relative overflow-hidden rounded-2xl border border-[#2a2a2a] bg-gradient-to-r from-[#151515] via-[#101010] to-[#151515] p-8 md:p-10 mb-10"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-[#C2A68C]/10 blur-3xl"></div>
-            <div className="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-[#E6D8C3]/10 blur-3xl"></div>
-            <div className="relative z-10">
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                <div>
-                  <span className="text-xs font-semibold tracking-widest text-[#C2A68C] uppercase">Legal</span>
-                  <h1 className="text-3xl md:text-5xl font-bold mt-2">Privacy Policy</h1>
-                  <p className="text-gray-300 mt-3 max-w-2xl">Understand how we collect, use, and protect your data across our products and services.</p>
-                </div>
-                <div className="shrink-0">
-                  <span className="px-3 py-1 rounded-full bg-[#C2A68C]/10 text-[#C2A68C] text-xs border border-[#C2A68C]/30">Last updated: Oct 2025</span>
-                </div>
-              </div>
-            </div>
+      {/* ── Hero ── */}
+      <section className="relative pt-28 pb-12 px-5 sm:px-8 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none" style={{
+          backgroundImage: 'linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px)',
+          backgroundSize: '48px 48px',
+        }} />
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse 90% 60% at 50% 0%, rgba(255,255,255,0.97) 0%, transparent 100%)' }} />
+
+        <div className="relative z-10 max-w-6xl mx-auto">
+          <motion.div variants={fadeUp(0)} initial="hidden" animate="show">
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/6 border border-black/8 text-[10px] font-bold tracking-[0.2em] uppercase text-black/60 mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-black animate-pulse" />
+              Legal
+            </span>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            {/* Table of contents */}
-            <aside className="lg:col-span-4">
-              <div className="sticky top-24">
-                <div className="rounded-2xl border border-[#2a2a2a] bg-[#121212] p-6">
-                  <h3 className="text-sm font-semibold text-gray-200 mb-4 tracking-wider">On this page</h3>
-                  <nav className="space-y-3 text-sm">
-                    {[
-                      { id: 'intro', label: 'Introduction' },
-                      { id: 'collect', label: 'Information We Collect' },
-                      { id: 'use', label: 'How We Use Information' },
-                      { id: 'cookies', label: 'Cookies & Tracking' },
-                      { id: 'sharing', label: 'Data Sharing' },
-                      { id: 'security', label: 'Data Security' },
-                      { id: 'rights', label: 'Your Rights' },
-                      { id: 'contact', label: 'Contact Us' },
-                    ].map((item, i) => (
-                      <a key={item.id} href={`#${item.id}`} className="group flex items-center text-gray-400 hover:text-white transition-colors">
-                        <span className="w-6 h-6 mr-3 rounded-md bg-[#1d1d1d] border border-[#2a2a2a] text-xs flex items-center justify-center text-gray-400 group-hover:text-[#C2A68C] group-hover:border-[#3a3a3a]">{i+1}</span>
-                        {item.label}
-                      </a>
-                    ))}
-                  </nav>
-                </div>
-              </div>
-            </aside>
+          <motion.h1
+            variants={fadeUp(0.06)} initial="hidden" animate="show"
+            className="font-black text-black leading-[1.04] mb-4"
+            style={{ fontSize: 'clamp(2.6rem, 7vw, 4.6rem)', letterSpacing: '-0.045em' }}
+          >
+            Privacy<br />
+            <span style={{ color: 'rgba(0,0,0,0.2)' }}>Policy.</span>
+          </motion.h1>
 
-            {/* Content */}
-            <div className="lg:col-span-8 space-y-6">
-              {[
-                { id: 'intro', title: 'Introduction', content: (
-                  <p className="text-gray-300 leading-relaxed">This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our services.</p>
-                )},
-                { id: 'collect', title: 'Information We Collect', content: (
-                  <ul className="list-disc pl-6 space-y-2 text-gray-300">
-                    <li>Personal identification information such as name, email, and contact details.</li>
-                    <li>Usage data, analytics, and cookies to improve performance and user experience.</li>
-                    <li>Communication records when you contact us.</li>
-                  </ul>
-                )},
-                { id: 'use', title: 'How We Use Information', content: (
-                  <ul className="list-disc pl-6 space-y-2 text-gray-300">
-                    <li>To provide, operate, and maintain our services.</li>
-                    <li>To improve, personalize, and expand our offerings.</li>
-                    <li>To communicate with you for support and updates.</li>
-                    <li>To comply with legal obligations.</li>
-                  </ul>
-                )},
-                { id: 'cookies', title: 'Cookies & Tracking', content: (
-                  <p className="text-gray-300 leading-relaxed">We use cookies and similar tracking technologies to monitor activity on our site and hold certain information. You can control cookies through your browser settings.</p>
-                )},
-                { id: 'sharing', title: 'Data Sharing', content: (
-                  <p className="text-gray-300 leading-relaxed">We do not sell your personal information. We may share information with service providers who assist in our operations, subject to confidentiality obligations.</p>
-                )},
-                { id: 'security', title: 'Data Security', content: (
-                  <p className="text-gray-300 leading-relaxed">We implement appropriate technical and organizational measures to protect your data. However, no method of transmission over the Internet is 100% secure.</p>
-                )},
-                { id: 'rights', title: 'Your Rights', content: (
-                  <ul className="list-disc pl-6 space-y-2 text-gray-300">
-                    <li>Access, update, or delete your personal information.</li>
-                    <li>Opt-out of certain data processing activities.</li>
-                    <li>Withdraw consent where processing is based on consent.</li>
-                  </ul>
-                )},
-                { id: 'contact', title: 'Contact Us', content: (
-                  <div>
-                    <p className="text-gray-300 leading-relaxed">If you have any questions about this Privacy Policy or our practices, please visit our contact page.</p>
-                    <div className="mt-4">
-                      <motion.a href="/contact" className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#C2A68C] to-[#E6D8C3] text-[#0A0A0A] font-medium rounded-full hover:shadow-lg hover:shadow-[#C2A68C]/30 transition-all duration-300" whileHover={{ y: -2, scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                        Contact Us
-                      </motion.a>
-                    </div>
+          <motion.div variants={fadeUp(0.12)} initial="hidden" animate="show"
+            className="flex flex-wrap items-center gap-3">
+            <p className="text-[14px] text-black/40 leading-[1.7]">
+              How we collect, use, and protect your data across our products and services.
+            </p>
+            <span className="flex-shrink-0 text-[10px] px-3 py-1.5 rounded-full border border-black/10 text-black/35 font-semibold whitespace-nowrap">
+              Last updated: Oct 2025
+            </span>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Content ── */}
+      <section className="px-5 sm:px-8 pb-20 sm:pb-28 border-t border-black/6">
+        <div className="max-w-6xl mx-auto pt-10 grid lg:grid-cols-12 gap-10">
+
+          {/* Sticky TOC */}
+          <aside className="lg:col-span-3">
+            <motion.div
+              variants={fadeUp(0.1)} initial="hidden" animate="show"
+              className="sticky top-24 bg-white border border-black/8 rounded-2xl p-5"
+              style={{ boxShadow: '0 2px 16px rgba(0,0,0,0.04)' }}
+            >
+              <p className="text-[10px] font-black uppercase tracking-widest text-black/30 mb-4">On this page</p>
+              <nav className="flex flex-col gap-2">
+                {SECTIONS.map((s, i) => (
+                  <a
+                    key={s.id}
+                    href={`#${s.id}`}
+                    onClick={(e) => handleScroll(e, s.id)}
+                    className="flex items-center gap-3 group text-[12px] font-medium text-black/45 hover:text-black transition-colors duration-150"
+                  >
+                    <span className="w-5 h-5 rounded-md bg-black/5 flex items-center justify-center text-[9px] font-black text-black/30 group-hover:bg-black group-hover:text-white transition-all duration-150 flex-shrink-0">
+                      {i + 1}
+                    </span>
+                    {s.title}
+                  </a>
+                ))}
+              </nav>
+            </motion.div>
+          </aside>
+
+          {/* Sections */}
+          <div className="lg:col-span-9 flex flex-col gap-4">
+            {SECTIONS.map((s, i) => (
+              <motion.section
+                key={s.id}
+                id={s.id}
+                variants={pageFlip(i)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, margin: '-60px' }}
+                className="bg-white border border-black/8 rounded-2xl p-6 sm:p-8"
+                style={{ boxShadow: '0 2px 16px rgba(0,0,0,0.04)', transformOrigin: 'left center' }}
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white font-black text-[11px]">{String(i + 1).padStart(2, '0')}</span>
                   </div>
-                )},
-              ].map((section, idx) => (
-                <motion.section
-                  key={section.id}
-                  id={section.id}
-                  className="relative overflow-hidden rounded-2xl border border-[#2a2a2a] bg-[#121212] p-6 md:p-7"
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-100px' }}
-                  transition={{ duration: 0.5, delay: 0.05 * idx }}
-                >
-                  <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-[#C2A68C]/5"></div>
-                  <div className="flex items-start gap-3">
-                    <span className="w-8 h-8 rounded-lg bg-[#1d1d1d] border border-[#2a2a2a] text-xs flex items-center justify-center text-[#C2A68C] font-semibold">{idx+1}</span>
-                    <div className="flex-1">
-                      <h2 className="text-xl md:text-2xl font-semibold text-white mb-3">{section.title}</h2>
-                      {section.content}
-                    </div>
+                  <div className="flex-1">
+                    <h2
+                      className="font-bold text-black text-[17px] sm:text-[19px] mb-3"
+                      style={{ letterSpacing: '-0.02em' }}
+                    >
+                      {s.title}
+                    </h2>
+
+                    {s.items ? (
+                      <ul className="flex flex-col gap-2">
+                        {s.items.map((item) => (
+                          <li key={item} className="flex items-start gap-2.5 text-[13px] text-black/50 leading-[1.7]">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="flex-shrink-0 mt-0.5">
+                              <circle cx="7" cy="7" r="7" fill="rgba(0,0,0,0.07)" />
+                              <path d="M4.5 7l1.8 1.8L9.5 5.5" stroke="rgba(0,0,0,0.5)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="text-[13px] text-black/50 leading-[1.75]">{s.content}</p>
+                    )}
+
+                    {s.cta && (
+                      <div className="flex flex-wrap gap-3 mt-5">
+                        <motion.a
+                          href="https://wa.me/919413973399"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black text-white text-[12px] font-bold hover:bg-black/85 transition-colors"
+                          whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
+                        >
+                          WhatsApp Us
+                          <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                          </svg>
+                        </motion.a>
+                        <motion.a
+                          href="mailto:borbreak@gmail.com"
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-black/10 text-black text-[12px] font-bold hover:border-black/30 transition-colors"
+                          whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
+                        >
+                          Send Email
+                        </motion.a>
+                      </div>
+                    )}
                   </div>
-                </motion.section>
-              ))}
-            </div>
+                </div>
+              </motion.section>
+            ))}
           </div>
-        </section>
-      </main>
+
+        </div>
+      </section>
 
       <Footer />
     </div>
